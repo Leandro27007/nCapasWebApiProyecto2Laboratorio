@@ -11,7 +11,6 @@ namespace Proyecto2Laboratorio.Entities
         public int IdFactura { get; set; }
         public string? Sucursal { get; set; }
         public decimal? Descuento { get; set; }
-
         public byte[] FechaFactura { get; set; } = null!;
 
     }
