@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <ProjectReference Include="..\Proyecto2Laboratorio.DAL\Proyecto2Laboratorio.DAL.csproj" />
+=======
+>>>>>>> dcced03a846c5c72d1faf7b596b73d9cd28ddae4
     <ProjectReference Include="..\Proyecto2Laboratorio.Etities\Proyecto2Laboratorio.Entities.csproj" />
   </ItemGroup>
 
