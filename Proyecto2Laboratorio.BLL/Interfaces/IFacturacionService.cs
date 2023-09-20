@@ -11,7 +11,7 @@ namespace Proyecto2Laboratorio.BLL.Interfaces
     public interface IFacturacionService
     {
         //Quiero poner que en vez de devolver un object, retorne un DTO con el estado de las respuesta.
-        Task<object> Facturar(Factura factura);
+        Task<object> Facturar(Recibo factura);
 
 
     }

@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace Proyecto2Laboratorio.Entities
 {
-    public class Recibo
+    public class Roles
     {
         [Key]
-        public int ReciboID { get; set; }
+        public int RolId { get; set; }
         [Required]
-        public string NCF { get; set; }
-        public decimal Descuento { get; set; }
-        public DateTime Fecha { get; set; }
+        public string NombreRol { get; set; }
+        public string Descripcion { get; set; }
     }
 }

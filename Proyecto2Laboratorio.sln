@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proyecto2Laboratorio.Api", "Proyecto2Laboratorio.Api\Proyecto2Laboratorio.Api.csproj", "{BD97D848-39F4-4AC2-A47F-6B5E5B6120B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proyecto2Laboratorio.Api", "Proyecto2Laboratorio.Api\Proyecto2Laboratorio.Api.csproj", "{BD97D848-39F4-4AC2-A47F-6B5E5B6120B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proyecto2Laboratorio.BLL", "Proyecto2Laboratorio.BLL\Proyecto2Laboratorio.BLL.csproj", "{F4EECECF-75A3-4B39-B067-C5882CCBCE5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proyecto2Laboratorio.BLL", "Proyecto2Laboratorio.BLL\Proyecto2Laboratorio.BLL.csproj", "{F4EECECF-75A3-4B39-B067-C5882CCBCE5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proyecto2Laboratorio.DAL", "Proyecto2Laboratorio.DAL\Proyecto2Laboratorio.DAL.csproj", "{F2040A41-931B-4210-8245-A2E7C340BAA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proyecto2Laboratorio.DAL", "Proyecto2Laboratorio.DAL\Proyecto2Laboratorio.DAL.csproj", "{F2040A41-931B-4210-8245-A2E7C340BAA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proyecto2Laboratorio.Etities", "Proyecto2Laboratorio.Etities\Proyecto2Laboratorio.Etities.csproj", "{44CA94C0-03A4-417D-B8C8-065E2C00BC39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proyecto2Laboratorio.Entities", "Proyecto2Laboratorio.Etities\Proyecto2Laboratorio.Entities.csproj", "{44CA94C0-03A4-417D-B8C8-065E2C00BC39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

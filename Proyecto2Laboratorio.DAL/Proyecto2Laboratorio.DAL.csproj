@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Proyecto2Laboratorio.Etities\Proyecto2Laboratorio.Etities.csproj" />
+    <ProjectReference Include="..\Proyecto2Laboratorio.Etities\Proyecto2Laboratorio.Entities.csproj" />
   </ItemGroup>
 
 </Project>
