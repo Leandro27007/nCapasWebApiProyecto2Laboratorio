@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Proyecto2Laboratorio.Etities
+namespace Proyecto2Laboratorio.Entities
 {
-    public class Factura
+    public class Recibo
     {
         public int IdFactura { get; set; }
         public string? Sucursal { get; set; }
