@@ -9,6 +9,7 @@ namespace Proyecto2Laboratorio.Entities
 {
     public class Permisos
     {
+        //Comit a master
         [Key]
         public int PermisoId { get; set; }
         [Required]
