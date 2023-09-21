@@ -18,7 +18,6 @@ namespace Proyecto2Laboratorio.Entities
         public string Descripcion { get; set; }
         public DateTime Fecha { get; set; }
 
-
         public List<Recibo> Recibos { get; set; }
 
     }

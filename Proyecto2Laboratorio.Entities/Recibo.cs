@@ -12,6 +12,10 @@ namespace Proyecto2Laboratorio.Entities
     {
         //comentario
 
+        //Otro Comentario
+
+        //Tercer comentario
+
         [Key]
         public int ReciboId { get; set; }
         [Required]
@@ -26,13 +30,13 @@ namespace Proyecto2Laboratorio.Entities
         public Medico Medico { get; set; }
         [ForeignKey("Medico")]
         public string CedulaMedico { get; set; }
-
-        [ForeignKey("Usuario")]
         public Usuario Usuario { get; set; }
+        [ForeignKey("Usuario")]
         public string CedulaUsuario { get; set; }
 
-        [ForeignKey("EstadoRecibo")]
+
         public EstadoRecibo EstadoRecibo { get; set; }
+        [ForeignKey("EstadoRecibo")]
         public int EstadoReciboId { get; set; }
 
         public List<PruebaDeLaboratorio> PruebasDeLaboratorio { get; set; }
