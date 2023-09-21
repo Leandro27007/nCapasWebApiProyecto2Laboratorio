@@ -9,10 +9,14 @@ namespace Proyecto2Laboratorio.Entities
 {
     public class Roles
     {
-        [Key]
+        [Key] // un comentario
         public int RolId { get; set; }
         [Required]
         public string NombreRol { get; set; }
         public string Descripcion { get; set; }
+
+
+
+
     }
 }

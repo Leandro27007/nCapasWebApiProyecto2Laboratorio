@@ -25,6 +25,7 @@ namespace Proyecto2Laboratorio.Entities
         [Required]
         public DateTime FechaRegistro { get; set; }
 
+        public List<Recibo> Recibos { get; set; }
 
 
     }

@@ -23,5 +23,7 @@ namespace Proyecto2Laboratorio.Entities
         public string? Email { get; set; }
         [Required]
         public DateTime FechaRegistro { get; set; }
+
+        public List<Recibo> Recibos { get; set; }
     }
 }

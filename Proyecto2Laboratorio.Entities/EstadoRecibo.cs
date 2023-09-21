@@ -14,5 +14,7 @@ namespace Proyecto2Laboratorio.Entities
         [Required]
         public string NombreEstado { get; set; }
         public string DescripcionEstado { get; set; }
+
+        public List<Recibo> Recibos { get; set; }
     }
 }
