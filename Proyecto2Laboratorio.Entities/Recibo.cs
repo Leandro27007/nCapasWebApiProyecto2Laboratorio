@@ -12,6 +12,8 @@ namespace Proyecto2Laboratorio.Entities
     {
         //comentario
 
+        //Otro Comentario
+
         [Key]
         public int ReciboId { get; set; }
         [Required]
