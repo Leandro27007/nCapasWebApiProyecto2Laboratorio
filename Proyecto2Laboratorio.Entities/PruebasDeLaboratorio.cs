@@ -17,5 +17,9 @@ namespace Proyecto2Laboratorio.Entities
         public decimal Precio { get; set; }
         public string Descripcion { get; set; }
         public DateTime Fecha { get; set; }
+
+
+        public List<Recibo> Recibos { get; set; }
+
     }
 }
