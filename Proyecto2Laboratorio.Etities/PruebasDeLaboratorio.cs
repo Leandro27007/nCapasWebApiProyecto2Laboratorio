@@ -7,19 +7,15 @@ using System.Threading.Tasks;
 
 namespace Proyecto2Laboratorio.Entities
 {
-    public class Cliente
+    public class PruebasDeLaboratorio
     {
-
         [Key]
-        public string Cedula { get; set; }
+        public int PruebaId { get; set; }
         [Required]
         public string Nombre { get; set; }
         [Required]
-        public string Apellido { get; set; }
-        public string? Telefono { get; set; }
-        public string? Email { get; set; }
-        [Required]
-        public DateTime FechaRegistro { get; set; }
-
+        public decimal Precio { get; set; }
+        public string Descripcion { get; set; }
+        public DateTime Fecha { get; set; }
     }
 }

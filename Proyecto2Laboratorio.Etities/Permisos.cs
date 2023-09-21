@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace Proyecto2Laboratorio.Entities
 {
-    public class Recibo
+    public class Permisos
     {
-
+        [Key]
+        public int PermisoId { get; set; }
+        [Required]
+        public string NombrePermiso { get; set; }
+        public string Descripcion { get; set; }
     }
 }
