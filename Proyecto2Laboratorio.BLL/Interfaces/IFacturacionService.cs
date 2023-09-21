@@ -1,4 +1,4 @@
-﻿using Proyecto2Laboratorio.Etities;
+﻿using Proyecto2Laboratorio.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

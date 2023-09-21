@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proyecto2Laboratorio.BLL", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proyecto2Laboratorio.DAL", "Proyecto2Laboratorio.DAL\Proyecto2Laboratorio.DAL.csproj", "{F2040A41-931B-4210-8245-A2E7C340BAA7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proyecto2Laboratorio.Entities", "Proyecto2Laboratorio.Etities\Proyecto2Laboratorio.Entities.csproj", "{44CA94C0-03A4-417D-B8C8-065E2C00BC39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proyecto2Laboratorio.Entities", "Proyecto2Laboratorio.Entities\Proyecto2Laboratorio.Entities.csproj", "{44CA94C0-03A4-417D-B8C8-065E2C00BC39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
