@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Proyecto2Laboratorio.Entities
 {
-    public class PruebasDeLaboratorio
+    public class PruebaDeLaboratorio
     {
         [Key]
         public int PruebaId { get; set; }

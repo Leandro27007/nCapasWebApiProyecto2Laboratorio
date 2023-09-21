@@ -23,7 +23,7 @@ namespace Proyecto2Laboratorio.Entities
 
         public Medico Medico { get; set; }
         [ForeignKey("Medico")]
-        public string CedulaMedico { get; set }
+        public string CedulaMedico { get; set; }
 
         [ForeignKey("Usuario")]
         public Usuario Usuario { get; set; }
