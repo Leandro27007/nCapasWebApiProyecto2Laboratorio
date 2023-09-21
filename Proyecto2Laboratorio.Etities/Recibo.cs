@@ -9,5 +9,6 @@ namespace Proyecto2Laboratorio.Entities
 {
     public class Recibo
     {
+
     }
 }

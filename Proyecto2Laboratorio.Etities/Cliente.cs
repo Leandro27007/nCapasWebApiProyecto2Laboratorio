@@ -9,7 +9,7 @@ namespace Proyecto2Laboratorio.Entities
 {
     public class Cliente
     {
-<<<<<<< HEAD
+
         [Key]
         public string Cedula { get; set; }
         [Required]
@@ -20,14 +20,6 @@ namespace Proyecto2Laboratorio.Entities
         public string? Email { get; set; }
         [Required]
         public DateTime FechaRegistro { get; set; }
-=======
-        public int IdCliente { get; set; }
-        public string NombreCliente { get; set; }
-        public string ApellidoCliente { get; set; }
-        public string? TelefonoCliente { get; set; }
-        public string CedulaCliente { get; set; }
-        public string? EmailCliente { get; set; }
 
->>>>>>> dcced03a846c5c72d1faf7b596b73d9cd28ddae4
     }
 }
