@@ -13,6 +13,7 @@ namespace Proyecto2Laboratorio.Entities
         [Key]
         public string Cedula { get; set; }
         [Required]
+        
         public string Nombre { get; set; }
         [Required]
         public string Apellido { get; set; }

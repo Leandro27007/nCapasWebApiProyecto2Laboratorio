@@ -10,7 +10,7 @@ namespace Proyecto2Laboratorio.Entities
     public class PruebaDeLaboratorio
     {
         [Key]
-        public int PruebaId { get; set; }
+        public int PruebaDeLaboratorioId { get; set; }
         [Required]
         public string Nombre { get; set; }
         [Required]
@@ -18,7 +18,7 @@ namespace Proyecto2Laboratorio.Entities
         public string Descripcion { get; set; }
         public DateTime Fecha { get; set; }
 
-        public List<Recibo> Recibos { get; set; }
+        public List<PruebaDeLaboratorioRecibo> Recibos { get; set; } 
 
     }
 }
