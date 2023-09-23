@@ -39,7 +39,7 @@ namespace Proyecto2Laboratorio.Entities
         [ForeignKey("EstadoRecibo")]
         public int EstadoReciboId { get; set; }
 
-        public List<PruebaDeLaboratorio> PruebasDeLaboratorio { get; set; }
+        public List<PruebaDeLaboratorioRecibo> PruebasDeLaboratorio { get; set; } = null!;
 
     }
 }
