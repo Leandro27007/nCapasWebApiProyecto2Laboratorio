@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace Proyecto2Laboratorio.DAL.Repositorio.Implementaciones
 {
-    public class UsuarioRepositorio : RepositorioGenerico<Usuario>, IUsuarioRepositorio
+    public class RolRepositorio : RepositorioGenerico<Rol>, IRolRepositorio
     {
 
 
         //CREO UN COSNTRUCTOR Y LE PASO EL CONTEXTO DE LA BASE DE DATOS POR CONSTRUCTOR, YA QUE LO ESPERA.
-        public UsuarioRepositorio(ApplicationDbContext db) : base(db)
+        public RolRepositorio(ApplicationDbContext db) : base(db)
         {
         }
 
 
-
         //AQUI YA NO VA NADA
+
 
     }
 }
