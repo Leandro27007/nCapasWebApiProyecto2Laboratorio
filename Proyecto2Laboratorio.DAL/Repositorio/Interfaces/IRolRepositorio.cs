@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Proyecto2Laboratorio.DAL.Repositorio.Interfaces
 {
-    public interface IRolRepositorio : IRepositorioGenerico<Roles>
+    public interface IRolRepositorio : IRepositorioGenerico<Rol>
     {
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proyecto2Laboratorio.DAL;
 
@@ -11,9 +12,11 @@ using Proyecto2Laboratorio.DAL;
 namespace Proyecto2Laboratorio.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230925225522_EntidadTurnoConRelaciones")]
+    partial class EntidadTurnoConRelaciones
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,7 +49,7 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
                     b.HasKey("Cedula");
 
-                    b.ToTable("cliente");
+                    b.ToTable("Cliente");
                 });
 
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.EstadoRecibo", b =>
@@ -84,7 +87,7 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
                     b.HasKey("EstadoTurnoId");
 
-                    b.ToTable("estadoTurno");
+                    b.ToTable("EstadoTurno");
                 });
 
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.Medico", b =>
@@ -120,28 +123,7 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
                     b.HasKey("Cedula");
 
-                    b.ToTable("medico");
-                });
-
-            modelBuilder.Entity("Proyecto2Laboratorio.Entities.Permiso", b =>
-                {
-                    b.Property<int>("PermisoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PermisoId"));
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NombrePermiso")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PermisoId");
-
-                    b.ToTable("permiso");
+                    b.ToTable("Medico");
                 });
 
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.PruebaDeLaboratorio", b =>
@@ -168,7 +150,7 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
                     b.HasKey("PruebaDeLaboratorioId");
 
-                    b.ToTable("pruebaDeLaboratorio");
+                    b.ToTable("pruebaDeLaboratorios");
                 });
 
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.PruebaDeLaboratorioRecibo", b =>
@@ -195,7 +177,7 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
                     b.HasIndex("ReciboId");
 
-                    b.ToTable("pruebaDeLaboratorioRecibo");
+                    b.ToTable("PruebaDeLaboratorioRecibo");
                 });
 
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.Recibo", b =>
@@ -241,10 +223,10 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
                     b.HasIndex("EstadoReciboId");
 
-                    b.ToTable("recibo");
+                    b.ToTable("Recibo");
                 });
 
-            modelBuilder.Entity("Proyecto2Laboratorio.Entities.Rol", b =>
+            modelBuilder.Entity("Proyecto2Laboratorio.Entities.Roles", b =>
                 {
                     b.Property<int>("RolId")
                         .ValueGeneratedOnAdd()
@@ -265,7 +247,7 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
                     b.HasKey("RolId");
 
-                    b.ToTable("rol");
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.Turno", b =>
@@ -281,7 +263,7 @@ namespace Proyecto2Laboratorio.DAL.Migrations
                     b.HasIndex("EstadoTurnoId")
                         .IsUnique();
 
-                    b.ToTable("turno");
+                    b.ToTable("Turno");
                 });
 
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.TurnoPruebaDeLaboratorio", b =>
@@ -305,7 +287,7 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
                     b.HasIndex("TurnoId");
 
-                    b.ToTable("turnoPruebaDeLaboratorio");
+                    b.ToTable("TurnoPruebaDeLaboratorio");
                 });
 
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.Usuario", b =>
@@ -341,7 +323,7 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
                     b.HasKey("Cedula");
 
-                    b.ToTable("usuario");
+                    b.ToTable("Usuario");
                 });
 
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.PruebaDeLaboratorioRecibo", b =>

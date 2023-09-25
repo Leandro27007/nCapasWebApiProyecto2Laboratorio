@@ -20,5 +20,6 @@ namespace Proyecto2Laboratorio.Entities
         public Recibo Recibo { get; set; }
         public int ReciboId { get; set; }
 
+
     }
 }

@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace Proyecto2Laboratorio.Entities
 {
-    public class Permisos
+    public class Rol
     {
-        //Comit a master
-        //Comit a master2
-
-        [Key]
-        public int PermisoId { get; set; }
+        [Key] // un comentario
+        public int RolId { get; set; }
         [Required]
-        public string NombrePermiso { get; set; }
+        public string NombreRol { get; set; }
         public string Descripcion { get; set; }
+        public DateTime FechaRegistro { get; set; }
+
     }
 }

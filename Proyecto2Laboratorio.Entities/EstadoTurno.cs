@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Proyecto2Laboratorio.Entities
 {
-    public class Turno
+    public class EstadoTurno
     {
         [Key]
-        public string TurnoId { get; set; } = null!;
-        public List<TurnoPruebaDeLaboratorio> turnoPruebaDeLaboratorios { get; set; } = new();
-
-        public EstadoTurno EstadoTurno { get; set; }
         public int EstadoTurnoId { get; set; }
+        public string NombreEstado { get; set; }
+
+        public Turno Turno { get; set; }
+
     }
 }
