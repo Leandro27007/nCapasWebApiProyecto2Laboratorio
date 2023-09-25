@@ -11,7 +11,12 @@ namespace Proyecto2Laboratorio.DAL.Repositorio.Implementaciones
     public class ClienteRepositorio : RepositorioGenerico<Cliente>, IClienteRepositorio
     {
 
+        //CREO UN COSNTRUCTOR Y LE PASO EL CONTEXTO DE LA BASE DE DATOS POR CONSTRUCTOR, YA QUE LO ESPERA.
+        public ClienteRepositorio(ApplicationDbContext db) : base(db)
+        {          
+        }
 
+        //AQUI YA NO VA NADA
 
 
     }

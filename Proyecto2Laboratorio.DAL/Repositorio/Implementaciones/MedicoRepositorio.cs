@@ -10,6 +10,10 @@ namespace Proyecto2Laboratorio.DAL.Repositorio.Implementaciones
 {
     public class MedicoRepositorio : RepositorioGenerico<Medico>, IMedicoRepositorio
     {
+        //CREO UN COSNTRUCTOR Y LE PASO EL CONTEXTO DE LA BASE DE DATOS POR CONSTRUCTOR, YA QUE LO ESPERA.
+        public MedicoRepositorio(ApplicationDbContext db) : base(db)
+        {
+        }
 
 
 
