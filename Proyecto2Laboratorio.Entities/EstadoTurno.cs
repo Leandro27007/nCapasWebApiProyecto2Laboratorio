@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace Proyecto2Laboratorio.Entities
 {
-    public class Permisos
+    public class EstadoTurno
     {
         [Key]
-        public int PermisoId { get; set; }
-        [Required]
-        public string NombrePermiso { get; set; }
-        public string Descripcion { get; set; }
+        public int EstadoTurnoId { get; set; }
+        public string NombreEstado { get; set; }
+
+        public Turno Turno { get; set; }
+
     }
 }

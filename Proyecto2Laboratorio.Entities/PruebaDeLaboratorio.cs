@@ -18,7 +18,10 @@ namespace Proyecto2Laboratorio.Entities
         public string Descripcion { get; set; }
         public DateTime Fecha { get; set; }
 
-        public List<PruebaDeLaboratorioRecibo> Recibos { get; set; } 
+        public List<PruebaDeLaboratorioRecibo> Recibos { get; set; }
+
+
+        public List<TurnoPruebaDeLaboratorio> turnoPruebaDeLaboratorios { get; set; } = new();
 
     }
 }

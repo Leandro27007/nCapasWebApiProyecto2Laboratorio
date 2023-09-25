@@ -16,14 +16,18 @@ namespace Proyecto2Laboratorio.DAL
 
         }
 
-        DbSet<Cliente> Cliente { get; set; }
-        DbSet<Recibo> Recibo { get; set; }
-        DbSet<Medico> Medico { get; set; }
-        DbSet<Usuario> Usuario { get; set; }
+        DbSet<Cliente> cliente { get; set; }
+        DbSet<Recibo> recibo { get; set; }
+        DbSet<Medico> medico { get; set; }
+        DbSet<Usuario> usuario { get; set; }
         DbSet<EstadoRecibo> estadoRecibo { get; set; }
-        DbSet<PruebaDeLaboratorio> pruebaDeLaboratorios { get; set; }
-        DbSet<Roles> Roles { get; set; }
-
+        DbSet<PruebaDeLaboratorio> pruebaDeLaboratorio { get; set; }
+        DbSet<PruebaDeLaboratorioRecibo> pruebaDeLaboratorioRecibo { get; set; }
+        DbSet<Rol> rol { get; set; }
+        DbSet<Permiso> permiso { get; set; }
+        DbSet<Turno> turno { get; set; }
+        DbSet<EstadoTurno> estadoTurno { get; set; }
+        DbSet<TurnoPruebaDeLaboratorio> turnoPruebaDeLaboratorio { get; set; }
 
 
     }
