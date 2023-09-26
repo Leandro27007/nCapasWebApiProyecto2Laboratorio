@@ -10,6 +10,6 @@ namespace Proyecto2Laboratorio.DAL.Repositorio.Interfaces
     public interface IMedicoRepositorio : IRepositorioGenerico<Medico>
     {
 
-
+        
     }
 }
