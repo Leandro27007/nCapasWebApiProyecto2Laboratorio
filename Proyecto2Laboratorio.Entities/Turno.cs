@@ -10,7 +10,7 @@ namespace Proyecto2Laboratorio.Entities
     public class Turno
     {
         [Key]
-        public string TurnoId { get; set; } = null!;
+        public string TurnoId { get; set; } = null!; 
         public List<TurnoPruebaDeLaboratorio> turnoPruebaDeLaboratorios { get; set; } = new();
 
         public EstadoTurno EstadoTurno { get; set; }
