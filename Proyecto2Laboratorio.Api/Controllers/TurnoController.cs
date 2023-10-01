@@ -15,18 +15,20 @@ namespace Proyecto2Laboratorio.Api.Controllers
 
         public TurnoController(ITurnoService turnoService)
         {
-            
+
             _turnoService = turnoService;
 
         }
 
 
         [HttpPost(Name = "GenerarTurno")]
-        public async string GenerarTurno(List<PruebaDeLaboratorio> pruebaDeLaboratorios)
+        public string GenerarTurno(List<PruebaDeLaboratorio> pruebaDeLaboratorios)
         {
+            //ToDo: Hacer esto
+
             //s_turnoService.GenerarTurno(pruebaDeLaboratorios);
 
-
+            return " ";
 
         }
     }

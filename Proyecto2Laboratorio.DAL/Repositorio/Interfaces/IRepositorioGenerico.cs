@@ -10,8 +10,8 @@ namespace Proyecto2Laboratorio.DAL.Repositorio.Interfaces
     {
         Task<T?> Obtener(Expression<Func<T, bool>> filtro);
         Task<IEnumerable<T>?> ObtenerTodo(Expression<Func<T, bool>>? filtro);
-        T Crear(T Modelo);
-        Task<bool> Editar(T Modelo);
+        Task<T> Crear(T Modelo, bool? GuardarCambios = true);
+        Task<bool> Editar(T Modelo, bool? GuardarCambios = true);
         Task<bool> Eliminar(T Modelo);
         Task<IQueryable<T>> Consultar(Expression<Func<T, bool>>? filtro = null);
         Task<bool> SaveChangeAsync();
