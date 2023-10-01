@@ -20,7 +20,6 @@ namespace Proyecto2Laboratorio.Entities
 
         public List<PruebaDeLaboratorioRecibo> Recibos { get; set; }
 
-
         public List<TurnoPruebaDeLaboratorio> turnoPruebaDeLaboratorios { get; set; } = new();
 
     }

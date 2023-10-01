@@ -1,31 +1,93 @@
 
+using Proyecto2Laboratorio.DAL.Repositorio.Interfaces;
+using Proyecto2Laboratorio.Entities;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 public class ClienteService : IClienteService
 {
-    private readonly IClienteRepository _clienteRepository;
+    private readonly IClienteRepositorio _clienteRepository;
 
-    public ClienteService(IClienteRepository clienteRepository)
+    public ClienteService(IClienteRepositorio clienteRepository)
     {
         _clienteRepository = clienteRepository;
     }
 
-    public async Task<Cliente> BuscarClientePorId(string? idCliente)
+    public async Task<Cliente> CrearClienteAsync(Cliente modelo)
     {
-
-        //LOGICA DE VALIDACION
-        if(string.IsNullOrWhiteSpace(idCliente))
-            idCliente == "0";
-
-        // Aquí puedes llamar al repositorio de clientes para buscar un cliente por su ID.
-        // La lógica de implementación real dependerá de tu aplicación.
-        /*AQUIIII*/    
-         Cliente? cliente =  await _clienteRepository.Obtener(d => d.ClienteId == idCliente);    
-        if(cliente == null)
+        //No validare entradas aqui por que las validaciones en el modelo me la facilita la propiedad ModelState de MVC en el Controller
+        try
         {
-            throw new Exepction("No se encontro el cliente");
+            //Mando a editar al cliente
+            await _clienteRepository.Crear(modelo);
+        }
+        //Actualmente dejo que se detecten exepciones generales producidas en acceso a datos, ya luego refactorizo para detectar exepciones especificas.
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
         }
 
-        return cliente;
+        return modelo;
+    }
 
-    }
+    public async Task<Cliente?> BuscarClientePorIdAsync(string? idCliente)
+    {
+
+        //Esto puede ser no necesario si valido con la propiedad ModelState en el controller.
+        //LOGICA DE VALIDACION: Si el idCliente es de una longitud no permitida o si viene null o blank lanzo una exepcion
+        if (string.IsNullOrWhiteSpace(idCliente) || idCliente.Length > 20)
+            throw new IOException("Error en la entrada de datos. Id no valido.");
+
+        //Pido el cliente a mi repositorio de datos de manera asincrona.
+        Cliente? cliente = await _clienteRepository.Obtener(d => d.Cedula == idCliente);
+
+        return cliente;
+    }
+
+    public async Task<bool> EditarClienteAsync(Cliente cliente)
+    {
+        bool seEdito;
+        try
+        {
+            //Mando a editar al cliente
+            seEdito = await _clienteRepository.Editar(cliente);
+        }
+        //Actualmente dejo que se detecten exepciones generales producidas en acceso a datos, ya luego refactorizo para detectar exepciones especificas.
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+
+        return seEdito;
+    }
+
+
+
+    public async Task<bool> EliminarClienteAsync(string? idCliente)
+    {
+        //Esto puede ser no necesario si valido con la propiedad ModelState en el controller.
+        //LOGICA DE VALIDACION: Si el idCliente es de una longitud no permitida o si viene null o blank lanzo una exepcion
+        if (string.IsNullOrWhiteSpace(idCliente) || idCliente.Length > 20)
+            throw new IOException("Error en la entrada de datos. Id no valido.");
+
+        bool seElimino = false;
+        try
+        {
+            //Obtengo el cliente que quier eliminar.
+            Cliente? cliente = await _clienteRepository.Obtener(d => d.Cedula == idCliente);
+
+            //Mando a eliminar el cliente
+            if(cliente != null)
+            seElimino = await _clienteRepository.Eliminar(cliente);
+
+        }
+        //Actualmente dejo que se detecten exepciones generales producidas en acceso a datos, ya luego refactorizo para detectar exepciones especificas.
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+
+        return seElimino;
+    }
 }

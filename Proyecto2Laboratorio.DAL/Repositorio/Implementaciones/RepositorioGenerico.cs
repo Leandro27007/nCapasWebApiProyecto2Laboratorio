@@ -34,14 +34,22 @@ namespace Proyecto2Laboratorio.DAL.Repositorio.Implementaciones
             throw new NotImplementedException();
         }
 
-        public T Crear(T modelo)
+        public async Task<T> Crear(T modelo, bool? GuardarCambios = true)
         {
             //LOGICA PARA CREAR
-            dbSet.Add(modelo);
-            return modelo;
+            await dbSet.AddAsync(modelo);
+
+
+            if (GuardarCambios == true)
+            {
+               await this.SaveChangeAsync();
+                return modelo;
+            }
+
+            return null;
         }
 
-        public Task<bool> Editar(T Modelo)
+        public Task<bool> Editar(T Modelo, bool? GuardarCambios = true)
         {
 
             //LOGICA PARA EDITAR CON GENERIC

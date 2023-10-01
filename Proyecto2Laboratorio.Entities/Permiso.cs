@@ -14,7 +14,7 @@ namespace Proyecto2Laboratorio.Entities
 
         [Key]
         public int PermisoId { get; set; }
-        [Required]
+        [Required (ErrorMessage ="El Nombre del permiso es obligatorio.")]
         public string NombrePermiso { get; set; }
         public string Descripcion { get; set; }
     }
