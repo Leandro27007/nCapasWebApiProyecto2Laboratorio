@@ -5,8 +5,8 @@ public interface IClienteService
 {
 
     Task<Cliente> CrearClienteAsync(Cliente cliente);
-    Task<Cliente?> BuscarClientePorIdAsync(string? idCliente);
-    Task<bool> EliminarClienteAsync(string? idCliente);
+    Task<Cliente?> BuscarClientePorIdAsync(int? idCliente);
+    Task<bool> EliminarClienteAsync(int? idCliente);
     Task<bool> EditarClienteAsync(Cliente cliente);
 
 }
