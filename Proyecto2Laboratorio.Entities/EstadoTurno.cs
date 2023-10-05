@@ -12,7 +12,6 @@ namespace Proyecto2Laboratorio.Entities
         [Key]
         public int EstadoTurnoId { get; set; }
         public string NombreEstado { get; set; }
-
         public Turno Turno { get; set; }
 
     }

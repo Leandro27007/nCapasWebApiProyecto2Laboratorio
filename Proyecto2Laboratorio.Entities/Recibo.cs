@@ -25,21 +25,14 @@ namespace Proyecto2Laboratorio.Entities
 
         public Cliente Cliente { get; set; }
         [ForeignKey("Cliente")]
-        public string CedulaCliente { get; set; }
-
-        public Medico Medico { get; set; }
-        [ForeignKey("Medico")]
-        public string CedulaMedico { get; set; }
-        public Usuario Usuario { get; set; }
-        [ForeignKey("Usuario")]
-        public string CedulaUsuario { get; set; }
-
+        public int ClienteId { get; set; }
 
         public EstadoRecibo EstadoRecibo { get; set; }
         [ForeignKey("EstadoRecibo")]
         public int EstadoReciboId { get; set; }
 
         public List<PruebaDeLaboratorioRecibo> PruebasDeLaboratorio { get; set; } = null!;
+        public List<UsuarioRecibo> UsuarioRecibos { get; set; } = null!;
 
     }
 }

@@ -11,7 +11,7 @@ namespace Proyecto2Laboratorio.Entities
     {
 
         [Key]
-        public int IdCliente { get; set; }
+        public int ClienteId { get; set; }
         [Required]
         
         public string Nombre { get; set; }
