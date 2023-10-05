@@ -27,7 +27,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
         {
             //AQUI TODO TIPO DE VALIDACIONES
 
-            if (modelo.CedulaCliente == null)
+            if (modelo.ClienteId == null)
             {
                 return modelo;
             }

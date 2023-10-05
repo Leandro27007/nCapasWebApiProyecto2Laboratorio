@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Proyecto2Laboratorio.Entities
 {
@@ -24,6 +22,7 @@ namespace Proyecto2Laboratorio.Entities
         [Required]
         public DateTime FechaRegistro { get; set; }
 
-        public List<Recibo> Recibos { get; set; }
+        public List<UsuarioRecibo> Recibos { get; set; } = null!;
+        
     }
 }

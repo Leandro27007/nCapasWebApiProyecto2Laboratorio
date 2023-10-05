@@ -39,7 +39,7 @@ public class ClienteService : IClienteService
             throw new IOException("Error en la entrada de datos. Id no valido.");
 
         //Pido el cliente a mi repositorio de datos de manera asincrona.
-        Cliente? cliente = await _clienteRepository.Obtener(d => d.IdCliente == idCliente);
+        Cliente? cliente = await _clienteRepository.Obtener(d => d.ClienteId == idCliente);
 
         return cliente;
     }
@@ -74,7 +74,7 @@ public class ClienteService : IClienteService
         try
         {
             //Obtengo el cliente que quier eliminar.
-            Cliente? cliente = await _clienteRepository.Obtener(d => d.IdCliente == idCliente);
+            Cliente? cliente = await _clienteRepository.Obtener(d => d.ClienteId == idCliente);
 
             //Mando a eliminar el cliente
             if(cliente != null)
