@@ -1,5 +1,7 @@
 ﻿using Proyecto2Laboratorio.BLL.Interfaces;
+using Proyecto2Laboratorio.DAL.Repositorio.Interfaces;
 using Proyecto2Laboratorio.Entities;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,48 +10,36 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
     public class ReciboService : IReciboService
     {
 
-        //Se crea un atributo privado que almacenara el objeto de reciboRepositorio
 
-        //private readonly IReciboRepositorio _reciboRepositorio;
+        private readonly IReciboRepositorio _reciboRepositorio;
+        private readonly IClienteRepositorio _clienteRepositorio;
 
-        //Recibo un objeto de Recibo Repositorio desde la DAL
-        public ReciboService(/*EJEMPLO:   IReciboRepositorio reciboRepositorio*/)
+        public ReciboService(IReciboRepositorio reciboRepositorio, IClienteRepositorio clienteRepositorio)
         {
-            
-            /*Se asigna el parametro al atributo:   reciboRepositorio = _reciboRepositorio*/
-
+            this._reciboRepositorio = reciboRepositorio;
+            this._clienteRepositorio = clienteRepositorio;
         }
 
 
-
-        //SUGERENCIA RECIBIR DTO EN CONTROLADORES Y BLL
         public async Task<Recibo> GuardarReciboAsync(Recibo modelo)
         {
-            //AQUI TODO TIPO DE VALIDACIONES
-
-            if (modelo.ClienteId == null)
-            {
-                return modelo;
-            }
-
-            //Si el modelo recibido pasa la validacion LLamo al metodo de guardar de la DALL
-
-            /*EJEMPLO:   reciboRepositorio.Crear(modelo)*/
-
-            throw new System.NotImplementedException();
+            return await _reciboRepositorio.Crear(modelo);
         }
 
-        public Task<Recibo> BuscarReciboAsync(int idRecibo)
+        public async Task<Recibo?> BuscarReciboAsync(int idRecibo)
         {
-            throw new System.NotImplementedException();
+            var recibo = await _reciboRepositorio.Obtener(r => r.ReciboId == idRecibo);
+
+            return recibo;
         }
 
-
+        //TODO: Implementar
         public Task<List<Recibo>> ListarRecibosAsync(int paginaActual, int? cantidadRegistros)
         {
             throw new System.NotImplementedException();
         }
 
+        //TODO: Implementar
         public Task<bool> ReembolsarReciboAsync()
         {
             throw new System.NotImplementedException();

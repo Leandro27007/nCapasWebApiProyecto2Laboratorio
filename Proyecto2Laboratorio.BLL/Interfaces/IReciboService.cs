@@ -12,7 +12,7 @@ namespace Proyecto2Laboratorio.BLL.Interfaces
         Task<Recibo> GuardarReciboAsync(Recibo modelo);
         Task<bool> ReembolsarReciboAsync();
         Task<List<Recibo>> ListarRecibosAsync(int paginaActual, int? cantidadRegistros);
-        Task<Recibo> BuscarReciboAsync(int idRecibo);
+        Task<Recibo?> BuscarReciboAsync(int idRecibo);
 
     }
 }

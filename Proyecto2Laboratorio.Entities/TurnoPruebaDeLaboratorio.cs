@@ -16,7 +16,7 @@ namespace Proyecto2Laboratorio.Entities
         public int PruebaDeLaboratorioId { get; set; }
 
         public Turno Turno { get; set; }
-        public string TurnoId { get; set; } = null!;
+        public string TurnoId { get; set; } = "T-";
 
     }
 }

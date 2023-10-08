@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Proyecto2Laboratorio.BLL.Interfaces;
 using Proyecto2Laboratorio.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Proyecto2Laboratorio.Api.Controllers
 {
@@ -11,7 +11,7 @@ namespace Proyecto2Laboratorio.Api.Controllers
     public class TurnoController : ControllerBase
     {
 
-        private ITurnoService _turnoService; 
+        private ITurnoService _turnoService;
 
         public TurnoController(ITurnoService turnoService)
         {
@@ -22,13 +22,37 @@ namespace Proyecto2Laboratorio.Api.Controllers
 
 
         [HttpPost(Name = "GenerarTurno")]
-        public string GenerarTurno(List<PruebaDeLaboratorio> pruebaDeLaboratorios)
+        public async Task<ActionResult> GenerarTurno(List<PruebaDeLaboratorio> pruebaDeLaboratorios)
         {
-            //ToDo: Hacer esto
+            var turno = await _turnoService.GenerarTurno(pruebaDeLaboratorios);
 
-            //s_turnoService.GenerarTurno(pruebaDeLaboratorios);
+            return Ok("Tu numero de turno es: "+turno.TurnoId);
+        }
 
-            return " ";
+        [HttpPut(Name = "CancelarTurno")]
+        public async Task<ActionResult> CancelarTurno(string TurnoId)
+        {
+            var resultado = await _turnoService.CancelarTurno(TurnoId);
+
+            if (!resultado)
+            {
+                return NotFound(resultado);
+            }
+
+            return Ok(resultado);
+        }
+        [HttpDelete(Name = "ResetearTurnos")]
+        public async Task<ActionResult> ResetearTurnos()
+        {
+
+            var resultado = await _turnoService.ResetearTurnos();
+
+            if (!resultado)
+            {
+                return NotFound(resultado);
+            }
+
+            return Ok("Turno reseteados correctamente"+resultado);
 
         }
     }

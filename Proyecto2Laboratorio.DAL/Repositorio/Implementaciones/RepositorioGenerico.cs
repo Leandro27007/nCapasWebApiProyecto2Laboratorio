@@ -26,12 +26,21 @@ namespace Proyecto2Laboratorio.DAL.Repositorio.Implementaciones
 
 
 
-        public Task<IQueryable<T>> Consultar(Expression<Func<T, bool>>? filtro = null)
+        public async Task<IQueryable<T>> Consultar(Expression<Func<T, bool>>? filtro = null)
         {
 
-            //LOGICA PARA CONSULTAR
+            IQueryable<T> consulta;
 
-            throw new NotImplementedException();
+            if (filtro == null)
+            {
+                consulta = dbSet.AsQueryable();
+            }
+            else
+            {
+                consulta = dbSet.Where(filtro).AsQueryable();
+            }
+
+            return  consulta;
         }
 
         public async Task<T> Crear(T modelo, bool? GuardarCambios = true)
@@ -49,35 +58,27 @@ namespace Proyecto2Laboratorio.DAL.Repositorio.Implementaciones
             return null;
         }
 
-        public Task<bool> Editar(T Modelo, bool? GuardarCambios = true)
+        public async Task<bool> Editar(T Modelo, bool? GuardarCambios = true)
         {
-
-            //LOGICA PARA EDITAR CON GENERIC
-
-            throw new NotImplementedException();
+            dbSet.Update(Modelo);
+            return await this.SaveChangeAsync();
         }
 
-        public Task<bool> Eliminar(T Modelo)
+        public async Task<bool> Eliminar(T Modelo)
         {
-            //LOGICA PARA ELIMINAR CON GENERIC
-
-            throw new NotImplementedException();
+            dbSet.Remove(Modelo);
+            return await this.SaveChangeAsync();
         }
 
-        public Task<T?> Obtener(Expression<Func<T, bool>> filtro)
+        public async Task<T?> Obtener(Expression<Func<T, bool>> filtro)
         {
 
-            //LOGICA PARA OBTENER CON GENERIC
-
-            throw new NotImplementedException();
+            return await dbSet.FirstOrDefaultAsync();
         }
 
-        public Task<IEnumerable<T>?> ObtenerTodo(Expression<Func<T, bool>>? filtro)
+        public async Task<List<T>?> ObtenerTodo(Expression<Func<T, bool>>? filtro = null)
         {
-
-            //LOGICA PARA OBTENER TODO
-
-            throw new NotImplementedException();
+            return await dbSet.ToListAsync();
         }
 
         public async Task<bool> SaveChangeAsync()

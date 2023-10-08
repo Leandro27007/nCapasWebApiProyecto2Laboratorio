@@ -11,6 +11,8 @@ namespace Proyecto2Laboratorio.BLL.Interfaces
     {
         Task<Turno> GenerarTurno(List<PruebaDeLaboratorio> pruebaDeLaboratorios);
         Task<bool> CancelarTurno(string idTurno);
+        Task<bool> Atender(string idTurno);
+        Task<bool> ResetearTurnos();
 
 
     }
