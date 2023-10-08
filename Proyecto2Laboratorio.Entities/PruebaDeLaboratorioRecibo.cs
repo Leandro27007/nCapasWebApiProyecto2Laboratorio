@@ -14,10 +14,9 @@ namespace Proyecto2Laboratorio.Entities
         [Column(Order =1)]
         public int Id { get; set; }
         public decimal Precio { get; set; }
-        public PruebaDeLaboratorio PruebaDeLaboratorio { get; set; }
+        public PruebaDeLaboratorio PruebaDeLaboratorio { get; set; } = new();
         public int PruebaDeLaboratorioId { get; set; }
-
-        public Recibo Recibo { get; set; }
+        public Recibo Recibo { get; set; } = new();
         public int ReciboId { get; set; }
 
 

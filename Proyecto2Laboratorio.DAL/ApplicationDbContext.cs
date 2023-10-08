@@ -26,9 +26,16 @@ namespace Proyecto2Laboratorio.DAL
         DbSet<Rol> rol { get; set; }
         DbSet<Permiso> permiso { get; set; }
         DbSet<Turno> turno { get; set; }
-        DbSet<EstadoTurno> estadoTurno { get; set; }
         DbSet<TurnoPruebaDeLaboratorio> turnoPruebaDeLaboratorio { get; set; }
 
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+
+        }
 
     }
 }

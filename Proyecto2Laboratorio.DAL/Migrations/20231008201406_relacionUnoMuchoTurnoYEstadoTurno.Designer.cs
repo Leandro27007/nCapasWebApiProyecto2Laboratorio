@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proyecto2Laboratorio.DAL;
 
@@ -11,9 +12,11 @@ using Proyecto2Laboratorio.DAL;
 namespace Proyecto2Laboratorio.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231008201406_relacionUnoMuchoTurnoYEstadoTurno")]
+    partial class relacionUnoMuchoTurnoYEstadoTurno
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,6 +74,23 @@ namespace Proyecto2Laboratorio.DAL.Migrations
                     b.HasKey("EstadoReciboId");
 
                     b.ToTable("estadoRecibo");
+                });
+
+            modelBuilder.Entity("Proyecto2Laboratorio.Entities.EstadoTurno", b =>
+                {
+                    b.Property<int>("EstadoTurnoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EstadoTurnoId"));
+
+                    b.Property<string>("NombreEstado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EstadoTurnoId");
+
+                    b.ToTable("estadoTurno");
                 });
 
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.Permiso", b =>
@@ -210,11 +230,12 @@ namespace Proyecto2Laboratorio.DAL.Migrations
                     b.Property<string>("TurnoId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("EstadoTurno")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("EstadoTurnoId")
+                        .HasColumnType("int");
 
                     b.HasKey("TurnoId");
+
+                    b.HasIndex("EstadoTurnoId");
 
                     b.ToTable("turno");
                 });
@@ -349,6 +370,17 @@ namespace Proyecto2Laboratorio.DAL.Migrations
                     b.Navigation("EstadoRecibo");
                 });
 
+            modelBuilder.Entity("Proyecto2Laboratorio.Entities.Turno", b =>
+                {
+                    b.HasOne("Proyecto2Laboratorio.Entities.EstadoTurno", "EstadoTurno")
+                        .WithMany("Turnos")
+                        .HasForeignKey("EstadoTurnoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EstadoTurno");
+                });
+
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.TurnoPruebaDeLaboratorio", b =>
                 {
                     b.HasOne("Proyecto2Laboratorio.Entities.PruebaDeLaboratorio", "PruebaDeLaboratorio")
@@ -393,6 +425,11 @@ namespace Proyecto2Laboratorio.DAL.Migrations
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.EstadoRecibo", b =>
                 {
                     b.Navigation("Recibos");
+                });
+
+            modelBuilder.Entity("Proyecto2Laboratorio.Entities.EstadoTurno", b =>
+                {
+                    b.Navigation("Turnos");
                 });
 
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.PruebaDeLaboratorio", b =>
