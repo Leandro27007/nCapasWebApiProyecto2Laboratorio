@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DTOs;
+using Microsoft.AspNetCore.Mvc;
 using Proyecto2Laboratorio.BLL.Interfaces;
-using Proyecto2Laboratorio.Entities;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Proyecto2Laboratorio.Api.Controllers
@@ -15,33 +14,37 @@ namespace Proyecto2Laboratorio.Api.Controllers
 
         public TurnoController(ITurnoService turnoService)
         {
-
             _turnoService = turnoService;
-
         }
 
 
-        [HttpPost(Name = "GenerarTurno")]
-        public async Task<ActionResult> GenerarTurno(List<PruebaDeLaboratorio> pruebaDeLaboratorios)
+        [HttpPost("GenerarTurno")]
+        public async Task<ActionResult> GenerarTurno(GenerarTurnoDTO modelo)
         {
-            var turno = await _turnoService.GenerarTurno(pruebaDeLaboratorios);
+            var turno = await _turnoService.GenerarTurno(modelo);
 
-            return Ok("Tu numero de turno es: "+turno.TurnoId);
+            return Ok("Tu numero de turno es: " + turno.TurnoId);
         }
 
-        [HttpPut(Name = "CancelarTurno")]
+        [HttpPut("CancelarTurno")]
         public async Task<ActionResult> CancelarTurno(string TurnoId)
         {
             var resultado = await _turnoService.CancelarTurno(TurnoId);
 
             if (!resultado)
             {
-                return NotFound(resultado);
+                return NotFound("No se encontro el turno");
             }
 
             return Ok(resultado);
         }
-        [HttpDelete(Name = "ResetearTurnos")]
+
+
+        /// <summary>
+        /// Elimina Todos los registros de turnos en la base de datos
+        /// </summary>
+        /// <returns></returns>
+        [HttpDelete("ResetearTurnos")]
         public async Task<ActionResult> ResetearTurnos()
         {
 
@@ -52,7 +55,7 @@ namespace Proyecto2Laboratorio.Api.Controllers
                 return NotFound(resultado);
             }
 
-            return Ok("Turno reseteados correctamente"+resultado);
+            return Ok("Turno reseteados correctamente" + resultado);
 
         }
     }

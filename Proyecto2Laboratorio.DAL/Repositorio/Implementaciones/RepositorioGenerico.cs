@@ -70,8 +70,12 @@ namespace Proyecto2Laboratorio.DAL.Repositorio.Implementaciones
             return await this.SaveChangeAsync();
         }
 
-        public async Task<T?> Obtener(Expression<Func<T, bool>> filtro)
+        public async Task<T?> Obtener(Expression<Func<T, bool>>? filtro = null)
         {
+            if (filtro != null)
+            {
+                return await dbSet.FirstOrDefaultAsync(filtro);
+            }
 
             return await dbSet.FirstOrDefaultAsync();
         }
@@ -94,7 +98,7 @@ namespace Proyecto2Laboratorio.DAL.Repositorio.Implementaciones
             catch (Exception)
             {
 
-                return false;
+                throw new Exception("Ocurrio un error al intentar guardar cambios en la base de datos");
             }
 
         }

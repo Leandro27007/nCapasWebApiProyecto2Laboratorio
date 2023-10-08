@@ -1,4 +1,6 @@
-﻿using Proyecto2Laboratorio.BLL.Interfaces;
+﻿using DTOs;
+using Microsoft.EntityFrameworkCore;
+using Proyecto2Laboratorio.BLL.Interfaces;
 using Proyecto2Laboratorio.DAL.Repositorio.Interfaces;
 using Proyecto2Laboratorio.Entities;
 using System.Collections.Generic;
@@ -24,7 +26,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
             //Si existe le cambio el estado a 2, o sea atendido.
             if (turno != null)
             {
-                turno.EstadoTurnoId = 2;
+                turno.EstadoTurno = "Atendido";
                 await _turnoRepositorio.Editar(turno);
 
                 return true;
@@ -40,7 +42,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
             //Si existe le cambio el estado a 3, o sea cancelado.
             if (turno != null)
             {
-                turno.EstadoTurnoId = 3;
+                turno.EstadoTurno = "Cancelado";
                 await _turnoRepositorio.Editar(turno);
 
                 return true;
@@ -48,29 +50,42 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
             return false;
         }
 
-        public async Task<Turno> GenerarTurno(List<PruebaDeLaboratorio> pruebaDeLaboratorios)
+        public async Task<Turno> GenerarTurno(GenerarTurnoDTO Turno)
         {
-            var consulta = _turnoRepositorio.Consultar().Result;
-            string? ultimoTurno = consulta.Select(d => d.TurnoId).LastOrDefault();
-            if (ultimoTurno == null)
-                ultimoTurno = "0";
+            //Pido a la capa Datos que me traiga el ultimo id de turno que esta registrado
+            var consulta = await _turnoRepositorio.Consultar();
+            var turno = await consulta.OrderBy(t => t.TurnoId).Select(t => t.TurnoId).LastOrDefaultAsync();
 
-            int numeroTurno = FormatearNumeroTurnoId(ultimoTurno);
+            if (turno == null)
+                turno = "0";
+
+            string ultimoTurno = turno;
+            
+
+            int numeroTurno = ExtraerNumeroDeIdTurno(ultimoTurno);
             numeroTurno += 1;
+            //Coloco el turno en el formato debido (T-0)
+            string turnoIdFormateado = $"T-{numeroTurno}";
+
 
             //Creo y asigno pruebasLaboratorio en un objeto para el turno que se va a crear.
             var turnoPruebaLab = new List<TurnoPruebaDeLaboratorio>();
-            for (int i = 0; i <= turnoPruebaLab.Count; i++)
+            for (int i = 0; i <= Turno.PruebasLab.Count -1; i++)
             {
-                turnoPruebaLab[i].PruebaDeLaboratorioId = pruebaDeLaboratorios[i].PruebaDeLaboratorioId;
-                turnoPruebaLab[i].TurnoId += numeroTurno.ToString();
+                turnoPruebaLab.Add(new TurnoPruebaDeLaboratorio()
+                {
+                    PruebaDeLaboratorioId = Turno.PruebasLab[i].IdPruebaLab,
+                    TurnoId = turnoIdFormateado
+                });
+
             }
+
 
             //mando a crear el turno en la base de datos y lo retorno
             return await _turnoRepositorio.Crear(new Turno()
             {
-                TurnoId = numeroTurno.ToString(),
-                EstadoTurnoId = 1,
+                TurnoId = turnoIdFormateado,
+                EstadoTurno = "Pendiente",
                 turnoPruebaDeLaboratorios = turnoPruebaLab
             });
 
@@ -90,7 +105,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
             return false;
         }
 
-        private int FormatearNumeroTurnoId(string idTurno = "0")
+        private int ExtraerNumeroDeIdTurno(string idTurno = "T-0")
         {
             string numeroDeIdTurno = Regex.Replace(idTurno, "T-", "").Trim();
             int numeroTurno = 0;
