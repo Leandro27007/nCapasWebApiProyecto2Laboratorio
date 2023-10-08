@@ -11,9 +11,8 @@ namespace Proyecto2Laboratorio.Entities
     public class Turno
     {
         [Key]
-        public string TurnoId { get; set; } = null!; 
+        public string TurnoId { get; set; } = "T-"; //Todos los turno empiezan con ese formato seguido del numero
         public List<TurnoPruebaDeLaboratorio> turnoPruebaDeLaboratorios { get; set; } = new();
-
         public EstadoTurno EstadoTurno { get; set; }
         [ForeignKey("EstadoTurno")]
         public int EstadoTurnoId { get; set; }
