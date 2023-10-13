@@ -13,7 +13,7 @@ namespace Proyecto2Laboratorio.DAL.Repositorio.Interfaces
         Task<T> Crear(T Modelo, bool? GuardarCambios = true);
         Task<bool> Editar(T Modelo, bool? GuardarCambios = true);
         Task<bool> Eliminar(T Modelo);
-        Task<IQueryable<T>> Consultar(Expression<Func<T, bool>>? filtro = null);
+        IQueryable<T> Consultar(Expression<Func<T, bool>>? filtro = null);
         Task<bool> SaveChangeAsync();
     }
 }

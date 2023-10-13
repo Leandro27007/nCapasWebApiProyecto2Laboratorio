@@ -10,6 +10,7 @@ namespace Proyecto2Laboratorio.BLL.Interfaces
 {
     public interface ITurnoService
     {
+        Task<List<TurnoDTO>> ListarTurnos();
         Task<Turno> GenerarTurno(GenerarTurnoDTO Turno);
         Task<bool> CancelarTurno(string idTurno);
         Task<bool> Atender(string idTurno);

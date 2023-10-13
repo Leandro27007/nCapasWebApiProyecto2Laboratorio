@@ -26,7 +26,7 @@ namespace Proyecto2Laboratorio.DAL.Repositorio.Implementaciones
 
 
 
-        public async Task<IQueryable<T>> Consultar(Expression<Func<T, bool>>? filtro = null)
+        public IQueryable<T> Consultar(Expression<Func<T, bool>>? filtro = null)
         {
 
             IQueryable<T> consulta;

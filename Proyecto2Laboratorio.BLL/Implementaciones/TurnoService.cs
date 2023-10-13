@@ -5,6 +5,7 @@ using Proyecto2Laboratorio.DAL.Repositorio.Interfaces;
 using Proyecto2Laboratorio.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -53,7 +54,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
         public async Task<Turno> GenerarTurno(GenerarTurnoDTO Turno)
         {
             //Pido a la capa Datos que me traiga el ultimo id de turno que esta registrado
-            var consulta = await _turnoRepositorio.Consultar();
+            var consulta =  _turnoRepositorio.Consultar();
             var turno = await consulta.OrderBy(t => t.TurnoId).Select(t => t.TurnoId).LastOrDefaultAsync();
 
             if (turno == null)
@@ -89,6 +90,25 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                 turnoPruebaDeLaboratorios = turnoPruebaLab
             });
 
+        }
+
+        public async Task<List<TurnoDTO>> ListarTurnos()
+        {
+            var consulta =  _turnoRepositorio.Consultar().AsQueryable();
+
+            var lista = await consulta.Select(t => new TurnoDTO()
+            {
+                IdTurno = t.TurnoId,
+
+                PruebasLab = t.turnoPruebaDeLaboratorios.Select(tp => new PruebaLabTurnoDTO()
+                {       
+                        IdPruebaLab = tp.PruebaDeLaboratorioId              
+                }).ToList()
+
+            }).ToListAsync();
+
+
+            return lista;
         }
 
         public async Task<bool> ResetearTurnos()

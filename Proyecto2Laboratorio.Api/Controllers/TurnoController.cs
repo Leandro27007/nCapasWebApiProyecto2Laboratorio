@@ -17,6 +17,14 @@ namespace Proyecto2Laboratorio.Api.Controllers
             _turnoService = turnoService;
         }
 
+        [HttpPost("ListarTurnos")]
+        public async Task<ActionResult> Listar( )
+        {
+            var turnos = await _turnoService.ListarTurnos();
+
+            return Ok(turnos);
+        }     
+        
 
         [HttpPost("GenerarTurno")]
         public async Task<ActionResult> GenerarTurno(GenerarTurnoDTO modelo)
