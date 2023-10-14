@@ -74,7 +74,9 @@ namespace Proyecto2Laboratorio.DAL.Repositorio.Implementaciones
         {
             if (filtro != null)
             {
-                return await dbSet.FirstOrDefaultAsync(filtro);
+                var result = await dbSet.FirstOrDefaultAsync(filtro);
+
+                return result;
             }
 
             return await dbSet.FirstOrDefaultAsync();

@@ -31,8 +31,8 @@ namespace Proyecto2Laboratorio.Entities
         [ForeignKey("EstadoRecibo")]
         public int EstadoReciboId { get; set; }
 
-        public List<PruebaDeLaboratorioRecibo> PruebasDeLaboratorio { get; set; } = null!;
-        public List<UsuarioRecibo> UsuarioRecibos { get; set; } = null!;
+        public List<PruebaDeLaboratorioRecibo> PruebasDeLaboratorio { get; set; } = new List<PruebaDeLaboratorioRecibo>();
+        public List<UsuarioRecibo> UsuarioRecibos { get; set; } = new List<UsuarioRecibo>();
 
     }
 }

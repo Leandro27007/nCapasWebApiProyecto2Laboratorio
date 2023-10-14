@@ -5,7 +5,6 @@ using Proyecto2Laboratorio.DAL.Repositorio.Interfaces;
 using Proyecto2Laboratorio.Entities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -54,14 +53,14 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
         public async Task<Turno> GenerarTurno(GenerarTurnoDTO Turno)
         {
             //Pido a la capa Datos que me traiga el ultimo id de turno que esta registrado
-            var consulta =  _turnoRepositorio.Consultar();
+            var consulta = _turnoRepositorio.Consultar();
             var turno = await consulta.OrderBy(t => t.TurnoId).Select(t => t.TurnoId).LastOrDefaultAsync();
 
             if (turno == null)
                 turno = "0";
 
             string ultimoTurno = turno;
-            
+
 
             int numeroTurno = ExtraerNumeroDeIdTurno(ultimoTurno);
             numeroTurno += 1;
@@ -71,7 +70,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
 
             //Creo y asigno pruebasLaboratorio en un objeto para el turno que se va a crear.
             var turnoPruebaLab = new List<TurnoPruebaDeLaboratorio>();
-            for (int i = 0; i <= Turno.PruebasLab.Count -1; i++)
+            for (int i = 0; i <= Turno.PruebasLab.Count - 1; i++)
             {
                 turnoPruebaLab.Add(new TurnoPruebaDeLaboratorio()
                 {
@@ -94,16 +93,18 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
 
         public async Task<List<TurnoDTO>> ListarTurnosPendientes()
         {
+
             var consulta =  _turnoRepositorio.Consultar().Where(t => 
             t.EstadoTurno == "Pendiente").AsQueryable();
+
 
             var lista = await consulta.Select(t => new TurnoDTO()
             {
                 IdTurno = t.TurnoId,
 
                 PruebasLab = t.turnoPruebaDeLaboratorios.Select(tp => new PruebaLabTurnoDTO()
-                {       
-                        IdPruebaLab = tp.PruebaDeLaboratorioId              
+                {
+                    IdPruebaLab = tp.PruebaDeLaboratorioId
                 }).ToList()
 
             }).ToListAsync();
@@ -138,7 +139,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
             {
                 foreach (var item in turnos)
                 {
-                   await _turnoRepositorio.Eliminar(item);
+                    await _turnoRepositorio.Eliminar(item);
                 }
                 return true;
             }

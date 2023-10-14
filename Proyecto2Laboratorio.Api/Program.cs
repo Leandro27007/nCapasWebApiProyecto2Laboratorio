@@ -8,6 +8,7 @@ using Proyecto2Laboratorio.BLL.Interfaces;
 using Proyecto2Laboratorio.DAL;
 using Proyecto2Laboratorio.DAL.Repositorio.Implementaciones;
 using Proyecto2Laboratorio.DAL.Repositorio.Interfaces;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,12 +19,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+builder.Services.AddControllers().AddJsonOptions(x =>
+   x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+
 builder.Services.AddDbContext<ApplicationDbContext>( opciones => opciones.UseSqlServer(builder.Configuration.GetConnectionString("conexion")));
 
 
 builder.Services.AddScoped<ITurnoRepositorio, TurnoRepositorio>();
 builder.Services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
 builder.Services.AddScoped<IReciboRepositorio, ReciboRepositorio>();
+builder.Services.AddScoped<IPruebaDeLaboratorioRepositorio, PruebaDeLaboratorioRepositorio>();
 
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IReciboService, ReciboService>();

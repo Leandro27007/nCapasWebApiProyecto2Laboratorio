@@ -18,6 +18,7 @@ namespace Proyecto2Laboratorio.Entities
         [Required]
         public string Apellido { get; set; }
         public string? Telefono { get; set; }
+        public string? Cedula { get; set; }
         public string? Email { get; set; }
         [Required]
         public DateTime FechaRegistro { get; set; }
