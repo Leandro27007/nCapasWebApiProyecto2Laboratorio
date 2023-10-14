@@ -13,7 +13,6 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
     public class ReciboService : IReciboService
     {
 
-
         private readonly IReciboRepositorio _reciboRepositorio;
         private readonly IClienteRepositorio _clienteRepositorio;
         private readonly IPruebaDeLaboratorioRepositorio _pruebaLabRepositorio;
@@ -52,11 +51,21 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
             }
 
 
+
+
             //Mapear el recibo.
             Recibo reciboParaAgregar = new Recibo();
             reciboParaAgregar.Fecha = DateTime.Now;
             reciboParaAgregar.EstadoReciboId = 1;
-            reciboParaAgregar.Cliente = clienteParaAgregar;
+            if (cliente != null)
+            {
+                reciboParaAgregar.ClienteId = cliente.ClienteId;
+            }
+            else
+            {
+                reciboParaAgregar.Cliente = clienteParaAgregar;
+            }
+
             reciboParaAgregar.NCF = "79835465465";
 
             var reciboAgregado = await _reciboRepositorio.Crear(reciboParaAgregar);
