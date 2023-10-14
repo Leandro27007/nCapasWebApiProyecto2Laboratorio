@@ -92,9 +92,10 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
 
         }
 
-        public async Task<List<TurnoDTO>> ListarTurnos()
+        public async Task<List<TurnoDTO>> ListarTurnosPendientes()
         {
-            var consulta =  _turnoRepositorio.Consultar().AsQueryable();
+            var consulta =  _turnoRepositorio.Consultar().Where(t => 
+            t.EstadoTurno == "Pendiente").AsQueryable();
 
             var lista = await consulta.Select(t => new TurnoDTO()
             {
@@ -103,6 +104,25 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                 PruebasLab = t.turnoPruebaDeLaboratorios.Select(tp => new PruebaLabTurnoDTO()
                 {       
                         IdPruebaLab = tp.PruebaDeLaboratorioId              
+                }).ToList()
+
+            }).ToListAsync();
+
+
+            return lista;
+        }
+
+        public async Task<List<TurnoDTO>> HistorialTurnos()
+        {
+            var consulta = _turnoRepositorio.Consultar().AsQueryable();
+
+            var lista = await consulta.Select(t => new TurnoDTO()
+            {
+                IdTurno = t.TurnoId,
+
+                PruebasLab = t.turnoPruebaDeLaboratorios.Select(tp => new PruebaLabTurnoDTO()
+                {
+                    IdPruebaLab = tp.PruebaDeLaboratorioId
                 }).ToList()
 
             }).ToListAsync();
