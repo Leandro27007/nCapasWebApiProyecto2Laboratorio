@@ -10,9 +10,10 @@ namespace Proyecto2Laboratorio.BLL.Interfaces
 {
     public interface IReciboService
     {
-        Task<Recibo> GenerarReciboAsync(GenerarReciboDTO modelo);
-        Task<bool> ReembolsarReciboAsync();
-        Task<List<Recibo>> ListarRecibosAsync(int paginaActual, int? cantidadRegistros);
-        Task<Recibo?> BuscarReciboAsync(int idRecibo);
+        Task<ReciboDTO?> GenerarReciboAsync(GenerarReciboDTO modelo);
+        Task<bool> ReembolsarReciboAsync(int IdRecibo, string notaDeReembolso);
+        Task<List<ReciboDTO>?> ListarRecibosAsync(int paginaActual = 1);
+        Task<ReciboDTO?> BuscarReciboAsync(int idRecibo);
+        Task<string?> ObtenerEstadoReciboAsync(int idRecibo);
     }
 }

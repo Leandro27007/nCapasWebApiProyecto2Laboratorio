@@ -26,7 +26,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
         }
 
 
-        public async Task<Recibo> GenerarReciboAsync(GenerarReciboDTO reciboDTO)
+        public async Task<ReciboDTO?> GenerarReciboAsync(GenerarReciboDTO reciboDTO)
         {
 
             //LOGICA PARA VALIDAR
@@ -50,13 +50,14 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                 //var clienteAgregado = _clienteRepositorio.Crear(clienteParaAgregar, GuardarCambios: false);
             }
 
-
-
-
             //Mapear el recibo.
             Recibo reciboParaAgregar = new Recibo();
+            reciboParaAgregar.Usuario = null;
+            reciboParaAgregar.Cliente = null;// Para que el ORM no intente agregar un usuario al intentar agregar un recibo
+            reciboParaAgregar.UsuarioId = reciboDTO.IdCajero;
             reciboParaAgregar.Fecha = DateTime.Now;
-            reciboParaAgregar.EstadoReciboId = 1;
+            reciboParaAgregar.Estado = "Pendiente";
+
             if (cliente != null)
             {
                 reciboParaAgregar.ClienteId = cliente.ClienteId;
@@ -75,6 +76,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
             //Mapeo las pruebas de laboratorio
             List<PruebaDeLaboratorioRecibo> pruebaDeLaboratorioRecibo = new();
 
+
             foreach (var item in reciboDTO.Pruebas)
             {
 
@@ -92,33 +94,108 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                 });
             }
 
-
-            reciboAgregado.PruebasDeLaboratorio.AddRange(pruebaDeLaboratorioRecibo);
-
+            reciboAgregado.PruebasDeLaboratorioRecibo.AddRange(pruebaDeLaboratorioRecibo);
             bool seEdito = await _reciboRepositorio.Editar(reciboAgregado);
 
 
-            return reciboAgregado;
+            return await BuscarReciboAsync(reciboAgregado.ReciboId);
+        }
+
+        public async Task<ReciboDTO?> BuscarReciboAsync(int idRecibo)
+        {
+            var recibo = await _reciboRepositorio.Consultar()
+                                                 .Include(r => r.Usuario)
+                                                 .Include(r => r.Cliente)
+                                                 .Include(r => r.PruebasDeLaboratorioRecibo)
+                                                 .ThenInclude(plr => plr.PruebaDeLaboratorio)
+                                                 .Where(r => r.ReciboId == idRecibo).FirstOrDefaultAsync();
+
+            ReciboDTO reciboDto = new();
+
+            reciboDto.IdRecibo =  recibo.ReciboId;
+            reciboDto.IdPruebaLabRecibo = recibo.PruebasDeLaboratorioRecibo.First().PruebaDeLaboratorioId;
+            reciboDto.NombreCajero = recibo.Usuario.Nombre;
+            reciboDto.NombreCliente = recibo.Cliente.Nombre;
+            reciboDto.Estado = recibo.Estado;
+            reciboDto.Pruebas = recibo.PruebasDeLaboratorioRecibo.Select(p => new PruebaReciboDTO()
+            {
+                IdPrueba = p.PruebaDeLaboratorio.PruebaDeLaboratorioId,
+                NombrePrueba = p.PruebaDeLaboratorio.Nombre,
+                Precio = p.Precio
+            }).ToList();
+            reciboDto.Total = recibo.PruebasDeLaboratorioRecibo.Select(p => p.PruebaDeLaboratorio.Precio).Sum();
+
+            return reciboDto;
 
         }
 
-        public async Task<Recibo?> BuscarReciboAsync(int idRecibo)
+        public async Task<string?> ObtenerEstadoReciboAsync(int idRecibo)
         {
-            var recibo = await _reciboRepositorio.Obtener(r => r.ReciboId == idRecibo);
+            string? mensajeRetorno = "No se encontro el recibo";
 
-            return recibo;
+            var recibo = await _reciboRepositorio.Consultar(r => r.ReciboId == idRecibo).FirstOrDefaultAsync();
+
+            if (recibo != null)
+                mensajeRetorno = $"El estado actual del recibo es: {recibo.Estado}";
+
+            return mensajeRetorno;
+        }
+
+        public async Task<List<ReciboDTO>?> ListarRecibosAsync(int paginaActual = 1)
+        {
+            var recibo = await _reciboRepositorio.Consultar()
+                                                 .Skip(paginaActual + 1)
+                                                 .Take(2)
+                                                 .Include(r => r.Usuario)
+                                                 .Include(r => r.Cliente)
+                                                 .Include(r => r.PruebasDeLaboratorioRecibo)
+                                                 .ThenInclude(plr => plr.PruebaDeLaboratorio)
+                                                 .ToListAsync();
+
+            List<ReciboDTO>? reciboDTOs = new();
+
+            for (int i = 0; i < recibo.Count; i++)
+            {
+
+                ReciboDTO reciboDto = new();
+                reciboDto.IdRecibo = recibo[i].ReciboId;
+                reciboDto.IdPruebaLabRecibo = recibo[i].PruebasDeLaboratorioRecibo.First().PruebaDeLaboratorioId;
+                reciboDto.NombreCajero = recibo[i].Usuario.Nombre;
+                reciboDto.NombreCliente = recibo[i].Cliente.Nombre;
+                reciboDto.Estado = recibo[i].Estado;
+                reciboDto.Pruebas = recibo[i].PruebasDeLaboratorioRecibo.Select(p => new PruebaReciboDTO()
+                {
+                    IdPrueba = p.PruebaDeLaboratorio.PruebaDeLaboratorioId,
+                    NombrePrueba = p.PruebaDeLaboratorio.Nombre,
+                    Precio = p.Precio
+                }).ToList();
+                reciboDto.Total = recibo[i].PruebasDeLaboratorioRecibo.Select(p => p.PruebaDeLaboratorio.Precio).Sum();
+
+                reciboDTOs.Add(reciboDto);
+            }
+
+
+            return reciboDTOs;
         }
 
         //TODO: Implementar
-        public Task<List<Recibo>> ListarRecibosAsync(int paginaActual, int? cantidadRegistros)
+        public async Task<bool> ReembolsarReciboAsync(int idRecibo, string notaDeReembolso)
         {
-            throw new System.NotImplementedException();
+            var recibo =  await _reciboRepositorio.Obtener(r => r.ReciboId == idRecibo);
+
+            if (recibo != null && recibo.Estado == "Pendiente")
+            {
+                recibo.Estado = "Reembolsado";
+                recibo.NotaDeModificacion = notaDeReembolso;
+                recibo.IdUltimoUsuarioQueModifico = 402;
+                await _reciboRepositorio.Editar(recibo);
+                return true;
+            }
+            return false;
+
         }
 
-        //TODO: Implementar
-        public Task<bool> ReembolsarReciboAsync()
-        {
-            throw new System.NotImplementedException();
-        }
+
+
     }
 }

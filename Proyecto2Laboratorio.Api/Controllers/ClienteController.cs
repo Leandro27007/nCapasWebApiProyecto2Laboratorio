@@ -13,35 +13,8 @@ namespace Proyecto2Laboratorio.Api.Controllers
 
         public ClienteController(IClienteService clienteService)
         {
-
             this._clienteService = clienteService;
-
         }
-
-        [HttpPost ("CrearCliente")]
-        public ActionResult CrearCliente([FromBody]Cliente modelo)
-        {
-            try
-            {
-                var cliente = _clienteService.CrearClienteAsync(modelo);
-                return Ok(cliente);
-
-            }
-            catch (System.Exception)
-            {
-
-                return BadRequest("Ocurrio un error, no se creo el cliente");
-            }
-
-
-        }
-
-
-
-
-
-
-
 
     }
 }

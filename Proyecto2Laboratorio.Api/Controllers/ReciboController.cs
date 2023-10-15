@@ -25,7 +25,28 @@ namespace Proyecto2Laboratorio.Api.Controllers
             return Ok(resultado);
         }
 
+        [HttpGet("ListarRecibos")]
+        public async Task<ActionResult> ListarRecibos([FromQuery] int PaginaActual = 1)
+        {
+            var resultado = await _reciboService.ListarRecibosAsync(PaginaActual);
+            return Ok(resultado);
+        }
 
+        [HttpGet("CheckearEstadoDeRecibo{id}")]
+        public async Task<ActionResult> ObtenerEstadoDeRecibo( int id)
+        {
+
+            var resultado = await _reciboService.ObtenerEstadoReciboAsync(id);
+
+            return Ok(resultado);
+        }
+
+        [HttpPost("Reembolsar")]
+        public async Task<ActionResult> Reembolsar([FromHeader] int IdRecibo, [FromHeader] string notaModificacion)
+        {
+            var resultado = await _reciboService.ReembolsarReciboAsync(IdRecibo, notaModificacion);
+            return Ok(resultado);
+        }
 
 
     }

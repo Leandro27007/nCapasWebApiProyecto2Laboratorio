@@ -104,7 +104,8 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
 
                 PruebasLab = t.turnoPruebaDeLaboratorios.Select(tp => new PruebaLabTurnoDTO()
                 {
-                    IdPruebaLab = tp.PruebaDeLaboratorioId
+                    IdPruebaLab = tp.PruebaDeLaboratorioId,
+                    NombrePrueba = tp.PruebaDeLaboratorio.Nombre
                 }).ToList()
 
             }).ToListAsync();
@@ -123,7 +124,8 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
 
                 PruebasLab = t.turnoPruebaDeLaboratorios.Select(tp => new PruebaLabTurnoDTO()
                 {
-                    IdPruebaLab = tp.PruebaDeLaboratorioId
+                    IdPruebaLab = tp.PruebaDeLaboratorioId,
+                    NombrePrueba = tp.PruebaDeLaboratorio.Nombre
                 }).ToList()
 
             }).ToListAsync();
