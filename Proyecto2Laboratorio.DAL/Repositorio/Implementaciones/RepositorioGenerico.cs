@@ -97,10 +97,10 @@ namespace Proyecto2Laboratorio.DAL.Repositorio.Implementaciones
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw new Exception("Ocurrio un error al intentar guardar cambios en la base de datos");
+                throw;
             }
 
         }

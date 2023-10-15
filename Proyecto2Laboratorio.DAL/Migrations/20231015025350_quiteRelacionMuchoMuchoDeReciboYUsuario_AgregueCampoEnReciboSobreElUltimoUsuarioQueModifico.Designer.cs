@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proyecto2Laboratorio.DAL;
 
@@ -11,9 +12,11 @@ using Proyecto2Laboratorio.DAL;
 namespace Proyecto2Laboratorio.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231015025350_quiteRelacionMuchoMuchoDeReciboYUsuario_AgregueCampoEnReciboSobreElUltimoUsuarioQueModifico")]
+    partial class quiteRelacionMuchoMuchoDeReciboYUsuario_AgregueCampoEnReciboSobreElUltimoUsuarioQueModifico
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,7 +164,7 @@ namespace Proyecto2Laboratorio.DAL.Migrations
                     b.Property<string>("NotaDeModificacion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UsuarioId")
+                    b.Property<string>("UsuariosCedula")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
@@ -169,7 +172,7 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
                     b.HasIndex("ClienteId");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("UsuariosCedula");
 
                     b.ToTable("recibo");
                 });
@@ -238,7 +241,7 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.Usuario", b =>
                 {
-                    b.Property<string>("UsuarioId")
+                    b.Property<string>("Cedula")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Apellido")
@@ -267,7 +270,7 @@ namespace Proyecto2Laboratorio.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UsuarioId");
+                    b.HasKey("Cedula");
 
                     b.ToTable("usuario");
                 });
@@ -281,7 +284,7 @@ namespace Proyecto2Laboratorio.DAL.Migrations
                         .IsRequired();
 
                     b.HasOne("Proyecto2Laboratorio.Entities.Recibo", "Recibo")
-                        .WithMany("PruebasDeLaboratorioRecibo")
+                        .WithMany("PruebasDeLaboratorio")
                         .HasForeignKey("ReciboId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -299,15 +302,15 @@ namespace Proyecto2Laboratorio.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Proyecto2Laboratorio.Entities.Usuario", "Usuario")
+                    b.HasOne("Proyecto2Laboratorio.Entities.Usuario", "Usuarios")
                         .WithMany("Recibos")
-                        .HasForeignKey("UsuarioId")
+                        .HasForeignKey("UsuariosCedula")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cliente");
 
-                    b.Navigation("Usuario");
+                    b.Navigation("Usuarios");
                 });
 
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.TurnoPruebaDeLaboratorio", b =>
@@ -343,7 +346,7 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.Recibo", b =>
                 {
-                    b.Navigation("PruebasDeLaboratorioRecibo");
+                    b.Navigation("PruebasDeLaboratorio");
                 });
 
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.Turno", b =>

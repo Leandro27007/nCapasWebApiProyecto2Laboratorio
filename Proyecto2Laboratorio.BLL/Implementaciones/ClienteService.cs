@@ -13,26 +13,10 @@ public class ClienteService : IClienteService
         _clienteRepository = clienteRepository;
     }
 
-    public async Task<Cliente> CrearClienteAsync(Cliente modelo)
-    {
-        //No validare entradas aqui por que las validaciones en el modelo me la facilita la propiedad ModelState de MVC en el Controller
-        try
-        {
-            //Mando a editar al cliente
-            await _clienteRepository.Crear(modelo);
-        }
-        //Actualmente dejo que se detecten exepciones generales producidas en acceso a datos, ya luego refactorizo para detectar exepciones especificas.
-        catch (Exception ex)
-        {
-            throw new Exception(ex.Message);
-        }
 
-        return modelo;
-    }
 
     public async Task<Cliente?> BuscarClientePorIdAsync(int? idCliente)
     {
-
         //Esto puede ser no necesario si valido con la propiedad ModelState en el controller.
         //LOGICA DE VALIDACION: Si el idCliente es de una longitud no permitida o si viene null o blank lanzo una exepcion
         if (idCliente == null || idCliente <= 0)

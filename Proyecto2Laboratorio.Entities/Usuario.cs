@@ -8,7 +8,7 @@ namespace Proyecto2Laboratorio.Entities
     public class Usuario
     {
         [Key]
-        public string Cedula { get; set; }
+        public string UsuarioId { get; set; }
         [Required]
         public string Nombre { get; set; }
         [Required]
@@ -21,8 +21,7 @@ namespace Proyecto2Laboratorio.Entities
         public string? Email { get; set; }
         [Required]
         public DateTime FechaRegistro { get; set; }
-
-        public List<UsuarioRecibo> Recibos { get; set; } = null!;
+        public List<Recibo> Recibos { get; set; }
         
     }
 }

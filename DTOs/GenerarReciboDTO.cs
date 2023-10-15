@@ -2,7 +2,7 @@
 {
     public class GenerarReciboDTO
     {
-        public int IdCajero { get; set; }
+        public string IdCajero { get; set; }
         public string NombreCliente { get; set; }
         public string ApellidoCliente { get; set; }
         public string? Telefono { get; set; }
