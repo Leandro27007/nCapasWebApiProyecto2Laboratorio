@@ -34,6 +34,7 @@ builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IReciboService, ReciboService>();
 builder.Services.AddScoped<ITurnoService, TurnoService>();
+builder.Services.AddScoped<IPruebasLabService, PruebaLabService>();
 
 
 
