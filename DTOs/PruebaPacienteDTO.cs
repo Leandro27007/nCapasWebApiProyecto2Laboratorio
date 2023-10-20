@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace DTOs
 {
-    public class PruebaReciboDTO
+    public class PruebaPacienteDTO
     {
         public int IdPrueba { get; set; }
         public string? NombrePrueba { get; set; }
-        public decimal Precio { get; set; }
     }
 }

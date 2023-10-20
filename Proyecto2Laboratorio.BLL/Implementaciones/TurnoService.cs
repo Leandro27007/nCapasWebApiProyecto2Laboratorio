@@ -56,8 +56,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
             var consulta = _turnoRepositorio.Consultar();
             var turno = await consulta.OrderBy(t => t.TurnoId).Select(t => t.TurnoId).LastOrDefaultAsync();
 
-            if (turno == null)
-                turno = "0";
+            turno ??= "0";
 
             string ultimoTurno = turno;
 

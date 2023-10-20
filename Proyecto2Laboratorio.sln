@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proyecto2Laboratorio.DAL", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proyecto2Laboratorio.Entities", "Proyecto2Laboratorio.Entities\Proyecto2Laboratorio.Entities.csproj", "{44CA94C0-03A4-417D-B8C8-065E2C00BC39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTOs", "DTOs\DTOs.csproj", "{3368CD3D-4390-4F3B-85F0-62E21BED99F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTOs", "DTOs\DTOs.csproj", "{3368CD3D-4390-4F3B-85F0-62E21BED99F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
