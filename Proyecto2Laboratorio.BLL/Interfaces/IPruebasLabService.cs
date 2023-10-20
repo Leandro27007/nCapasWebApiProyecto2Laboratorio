@@ -10,6 +10,9 @@ namespace Proyecto2Laboratorio.BLL.Interfaces
     public interface IPruebasLabService
     {
         Task<IEnumerable<PruebaLabDTO>?> ListarPruebas();
+        Task<PruebaLabDTO?> CrearPruebaLabAsync(CreacionPruebaLabDTO creacionPruebaLabDTO);
+        Task<bool?> EditarPruebaLabAsync(EdicionPruebaLabDTO creacionPruebaLabDTO);
+        Task<bool?> EliminarPruebaLabAsync(int IdPrueba);
 
     }
 }

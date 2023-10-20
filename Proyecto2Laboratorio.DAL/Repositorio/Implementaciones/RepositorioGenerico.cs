@@ -55,7 +55,7 @@ namespace Proyecto2Laboratorio.DAL.Repositorio.Implementaciones
                 return modelo;
             }
 
-            return null;
+            return null!;
         }
 
         public async Task<bool> Editar(T Modelo, bool? GuardarCambios = true)

@@ -25,16 +25,19 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>( opciones => opciones.UseSqlServer(builder.Configuration.GetConnectionString("conexion")));
 
-
+//RepositoriosServices
 builder.Services.AddScoped<ITurnoRepositorio, TurnoRepositorio>();
 builder.Services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
 builder.Services.AddScoped<IReciboRepositorio, ReciboRepositorio>();
 builder.Services.AddScoped<IPruebaDeLaboratorioRepositorio, PruebaDeLaboratorioRepositorio>();
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+
+//BLLServices
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IReciboService, ReciboService>();
 builder.Services.AddScoped<ITurnoService, TurnoService>();
 builder.Services.AddScoped<IPruebasLabService, PruebaLabService>();
+builder.Services.AddScoped<IMedicoService, MedicoService>();
 
 
 

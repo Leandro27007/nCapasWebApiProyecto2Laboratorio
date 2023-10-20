@@ -24,7 +24,7 @@ namespace Proyecto2Laboratorio.Api.Controllers
 
             return Ok(resultado);
         }
-
+       
         [HttpGet("ListarRecibos")]
         public async Task<ActionResult> ListarRecibos([FromQuery] int PaginaActual = 1)
         {
