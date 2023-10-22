@@ -26,7 +26,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
 
             var pruebasLab = await _pruebaDeLaboratorioRepositorio.Consultar().Select(pl => new PruebaLabDTO()
             {
-                IdPrueba = pl.PruebaDeLaboratorioId,
+                idPruebaLab = pl.PruebaDeLaboratorioId,
                 NombrePrueba = pl.Nombre,
                 Precio = pl.Precio
             }).ToListAsync();
@@ -49,7 +49,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
 
                 PruebaLabDTO pruebaLabDTO = new PruebaLabDTO()
                 {
-                    IdPrueba = resultado.PruebaDeLaboratorioId,
+                    idPruebaLab = resultado.PruebaDeLaboratorioId,
                     NombrePrueba = resultado.Nombre,
                     Precio = resultado.Precio
                 };
