@@ -8,7 +8,6 @@ using Proyecto2Laboratorio.BLL.Interfaces;
 using Proyecto2Laboratorio.DAL;
 using Proyecto2Laboratorio.DAL.Repositorio.Implementaciones;
 using Proyecto2Laboratorio.DAL.Repositorio.Interfaces;
-using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +22,19 @@ builder.Services.AddSwaggerGen();
 //builder.Services.AddControllers().AddJsonOptions(x =>
 //   x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
-builder.Services.AddDbContext<ApplicationDbContext>( opciones => opciones.UseSqlServer(builder.Configuration.GetConnectionString("conexion")));
+
+var ambiente = builder.Environment;
+
+if (!ambiente.IsProduction())
+{
+    builder.Services.AddDbContext<ApplicationDbContext>(opciones => opciones.UseSqlServer(builder.Configuration.GetConnectionString("conexion")));
+}
+else
+{
+    builder.Services.AddDbContext<ApplicationDbContext>(opciones => opciones.UseNpgsql(builder.Configuration.GetConnectionString("conexionPostgres")));
+}
+
+
 
 //RepositoriosServices
 builder.Services.AddScoped<ITurnoRepositorio, TurnoRepositorio>();
@@ -39,8 +50,6 @@ builder.Services.AddScoped<ITurnoService, TurnoService>();
 builder.Services.AddScoped<IPruebasLabService, PruebaLabService>();
 builder.Services.AddScoped<IMedicoService, MedicoService>();
 
-
-
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy => policy
@@ -51,6 +60,11 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+
+//SeedDATA
+await DatosPorDefectoSeedData.Seed(app);
+
 
 app.UseCors();
 
