@@ -25,7 +25,7 @@ builder.Services.AddSwaggerGen();
 
 var ambiente = builder.Environment;
 
-if (ambiente.IsProduction())
+if (!ambiente.IsProduction())
 {
     builder.Services.AddDbContext<ApplicationDbContext>(opciones => opciones.UseSqlServer(builder.Configuration.GetConnectionString("conexion")));
 }
