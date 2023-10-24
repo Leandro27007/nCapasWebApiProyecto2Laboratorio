@@ -43,7 +43,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                         Pruebas = cliente.Recibos.First().PruebasDeLaboratorioRecibo.ToList()
                                                                                     .Select(p => new PruebaPacienteDTO()
                                                                                     {
-                                                                                        IdPrueba = p.PruebaDeLaboratorioId,
+                                                                                        IdPruebaLab = p.PruebaDeLaboratorioId,
                                                                                         NombrePrueba = p.PruebaDeLaboratorio.Nombre
                                                                                     }).ToList()
                     };
@@ -119,7 +119,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                         Pruebas = c.Recibos.First().PruebasDeLaboratorioRecibo.ToList()
                                                                                     .Select(p => new PruebaPacienteDTO()
                                                                                     {
-                                                                                        IdPrueba = p.PruebaDeLaboratorioId,
+                                                                                        IdPruebaLab = p.PruebaDeLaboratorioId,
                                                                                         NombrePrueba = p.PruebaDeLaboratorio.Nombre
                                                                                     }).ToList()
                     }).ToList();

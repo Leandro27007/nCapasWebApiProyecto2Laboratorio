@@ -80,7 +80,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
             foreach (var item in reciboDTO.Pruebas)
             {
 
-                decimal? precioPrueba = await _pruebaLabRepositorio.Consultar().Where(x => x.PruebaDeLaboratorioId == item.IdPrueba)
+                decimal? precioPrueba = await _pruebaLabRepositorio.Consultar().Where(x => x.PruebaDeLaboratorioId == item.IdPruebaLab)
                                                                           .Select(p => p.Precio)
                                                                           .FirstOrDefaultAsync();
                 if (precioPrueba == null)
@@ -88,7 +88,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
 
                 pruebaDeLaboratorioRecibo.Add(new PruebaDeLaboratorioRecibo()
                 {
-                    PruebaDeLaboratorioId = item.IdPrueba,
+                    PruebaDeLaboratorioId = item.IdPruebaLab,
                     ReciboId = reciboAgregado.ReciboId,
                     Precio = (decimal)precioPrueba
                 });
@@ -118,7 +118,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
             reciboDto.Estado = recibo.Estado;
             reciboDto.Pruebas = recibo.PruebasDeLaboratorioRecibo.Select(p => new PruebaReciboDTO()
             {
-                IdPrueba = p.PruebaDeLaboratorio.PruebaDeLaboratorioId,
+                IdPruebaLab = p.PruebaDeLaboratorio.PruebaDeLaboratorioId,
                 NombrePrueba = p.PruebaDeLaboratorio.Nombre,
                 Precio = p.Precio
             }).ToList();
@@ -163,7 +163,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                 reciboDto.Estado = recibo[i].Estado;
                 reciboDto.Pruebas = recibo[i].PruebasDeLaboratorioRecibo.Select(p => new PruebaReciboDTO()
                 {
-                    IdPrueba = p.PruebaDeLaboratorio.PruebaDeLaboratorioId,
+                    IdPruebaLab = p.PruebaDeLaboratorio.PruebaDeLaboratorioId,
                     NombrePrueba = p.PruebaDeLaboratorio.Nombre,
                     Precio = p.Precio
                 }).ToList();

@@ -8,7 +8,7 @@ namespace DTOs
 {
     public class PruebaReciboDTO
     {
-        public int IdPrueba { get; set; }
+        public int IdPruebaLab { get; set; }
         public string? NombrePrueba { get; set; }
         public decimal Precio { get; set; }
     }
