@@ -61,10 +61,10 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-/*
+
 //SeedDATA
 await DatosPorDefectoSeedData.Seed(app);
-*/
+
 
 app.UseCors();
 
