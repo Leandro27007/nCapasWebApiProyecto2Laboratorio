@@ -113,7 +113,6 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
             ReciboDTO reciboDto = new();
 
             reciboDto.IdRecibo =  recibo.ReciboId;
-            reciboDto.IdPruebaLabRecibo = recibo.PruebasDeLaboratorioRecibo.First().PruebaDeLaboratorioId;
             reciboDto.NombreCajero = recibo.Usuario.Nombre;
             reciboDto.NombreCliente = recibo.Cliente.Nombre;
             reciboDto.Estado = recibo.Estado;
@@ -159,7 +158,6 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
 
                 ReciboDTO reciboDto = new();
                 reciboDto.IdRecibo = recibo[i].ReciboId;
-                reciboDto.IdPruebaLabRecibo = recibo[i].PruebasDeLaboratorioRecibo.First().PruebaDeLaboratorioId;
                 reciboDto.NombreCajero = recibo[i].Usuario.Nombre;
                 reciboDto.NombreCliente = recibo[i].Cliente.Nombre;
                 reciboDto.Estado = recibo[i].Estado;

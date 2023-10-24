@@ -3,7 +3,6 @@
     public class ReciboDTO
     {
         public int IdRecibo { get; set; }
-        public int IdPruebaLabRecibo { get; set; }
         public string NombreCliente { get; set; }
         public string? NombreCajero { get; set; }
         public string Estado { get; set; }
