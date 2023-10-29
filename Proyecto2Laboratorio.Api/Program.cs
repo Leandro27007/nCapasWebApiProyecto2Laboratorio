@@ -30,8 +30,8 @@ if (!ambiente.IsProduction())
     builder.Services.AddDbContext<ApplicationDbContext>(opciones => opciones.UseSqlServer(builder.Configuration.GetConnectionString("conexion")));
 }
 else
-{
-    builder.Services.AddDbContext<ApplicationDbContext>(opciones => opciones.UseNpgsql(builder.Configuration.GetConnectionString("conexionPostgres")));
+{//AzureSql
+    builder.Services.AddDbContext<ApplicationDbContext>(opciones => opciones.UseSqlServer(builder.Configuration.GetConnectionString("AzureConexion")));
 }
 
 

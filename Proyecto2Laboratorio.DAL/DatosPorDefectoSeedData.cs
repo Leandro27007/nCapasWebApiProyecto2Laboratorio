@@ -20,7 +20,7 @@ namespace Proyecto2Laboratorio.DAL
                 if (db == null)
                     return;
 
-                db.Database.EnsureCreated();
+                await db.Database.EnsureCreatedAsync();
 
                 if (!db.usuario.Any())
                 {
