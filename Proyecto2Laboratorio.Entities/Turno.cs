@@ -13,6 +13,7 @@ namespace Proyecto2Laboratorio.Entities
         [Key]
         public string TurnoId { get; set; } = "T-"; //Todos los turno empiezan con ese formato seguido del numero
         public List<TurnoPruebaDeLaboratorio> turnoPruebaDeLaboratorios { get; set; } = new();
+        public DateTime FechaRegistro { get; set; }
         public string EstadoTurno { get; set; }
 
     }

@@ -1,5 +1,4 @@
 ﻿using DTOs;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Proyecto2Laboratorio.BLL.Interfaces;
 using System.Threading.Tasks;
@@ -10,7 +9,6 @@ namespace Proyecto2Laboratorio.Api.Controllers
     [ApiController]
     public class PruebaLabController : ControllerBase
     {
-
 
         private readonly IPruebasLabService _pruebasLabService;
 

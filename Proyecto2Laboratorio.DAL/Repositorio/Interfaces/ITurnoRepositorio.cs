@@ -9,5 +9,6 @@ namespace Proyecto2Laboratorio.DAL.Repositorio.Interfaces
 {
     public interface ITurnoRepositorio : IRepositorioGenerico<Turno>
     {
+        Task<string> ObtenerSiguienteTurno();
     }
 }

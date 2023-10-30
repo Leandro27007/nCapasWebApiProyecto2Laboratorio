@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Proyecto2Laboratorio.BLL.Interfaces;
 using Proyecto2Laboratorio.DAL.Repositorio.Interfaces;
 using Proyecto2Laboratorio.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -58,13 +59,12 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
 
             turno ??= "0";
 
-            string ultimoTurno = turno;
+            string ultimoTurnoId = await _turnoRepositorio.ObtenerSiguienteTurno();
 
-
-            int numeroTurno = ExtraerNumeroDeIdTurno(ultimoTurno);
-            numeroTurno += 1;
+            //int numeroTurno = ExtraerNumeroDeIdTurno(ultimoTurno);
+            //numeroTurno += 1;
             //Coloco el turno en el formato debido (T-0)
-            string turnoIdFormateado = $"T-{numeroTurno}";
+            //string turnoIdFormateado = $"T-{numeroTurno}";
 
 
             //Creo y asigno pruebasLaboratorio en un objeto para el turno que se va a crear.
@@ -74,7 +74,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                 turnoPruebaLab.Add(new TurnoPruebaDeLaboratorio()
                 {
                     PruebaDeLaboratorioId = Turno.PruebasLab[i].IdPruebaLab,
-                    TurnoId = turnoIdFormateado
+                    TurnoId = ultimoTurnoId
                 });
 
             }
@@ -83,8 +83,9 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
             //mando a crear el turno en la base de datos y lo retorno
             return await _turnoRepositorio.Crear(new Turno()
             {
-                TurnoId = turnoIdFormateado,
+                TurnoId = ultimoTurnoId,
                 EstadoTurno = "Pendiente",
+                FechaRegistro = DateTime.Now,
                 turnoPruebaDeLaboratorios = turnoPruebaLab
             });
 
@@ -94,7 +95,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
         {
 
             var consulta =  _turnoRepositorio.Consultar().Where(t => 
-            t.EstadoTurno == "Pendiente").AsQueryable();
+            t.EstadoTurno == "Pendiente").OrderByDescending(t => t.FechaRegistro).AsQueryable();
 
 
             var lista = await consulta.Select(t => new TurnoDTO()
@@ -115,7 +116,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
 
         public async Task<List<TurnoDTO>> HistorialTurnos()
         {
-            var consulta = _turnoRepositorio.Consultar().AsQueryable();
+            var consulta = _turnoRepositorio.Consultar().OrderByDescending(t => t.FechaRegistro).AsQueryable();
 
             var lista = await consulta.Select(t => new TurnoDTO()
             {
@@ -147,14 +148,6 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
             return false;
         }
 
-        private int ExtraerNumeroDeIdTurno(string idTurno = "T-0")
-        {
-            string numeroDeIdTurno = Regex.Replace(idTurno, "T-", "").Trim();
-            int numeroTurno = 0;
-            int.TryParse(numeroDeIdTurno, out numeroTurno);
-
-            return numeroTurno;
-        }
 
 
     }
