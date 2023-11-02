@@ -11,10 +11,8 @@ namespace Proyecto2Laboratorio.DAL
     {
         public static async Task Seed(IApplicationBuilder applicationBuilder)
         {
-
             using (var serviceScoped = applicationBuilder.ApplicationServices.CreateScope())
             {
-
                 var db = serviceScoped.ServiceProvider.GetService<ApplicationDbContext>();
 
                 if (db == null)
