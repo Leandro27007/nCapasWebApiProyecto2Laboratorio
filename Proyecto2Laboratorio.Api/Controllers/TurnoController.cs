@@ -1,6 +1,7 @@
 ﻿using DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Proyecto2Laboratorio.BLL.Interfaces;
+using Proyecto2Laboratorio.Entities;
 using System.Threading.Tasks;
 
 namespace Proyecto2Laboratorio.Api.Controllers
@@ -20,9 +21,18 @@ namespace Proyecto2Laboratorio.Api.Controllers
         [HttpGet("ListarTurnosPendientes")]
         public async Task<ActionResult> Listar( )
         {
-            var turnos = await _turnoService.ListarTurnosPendientes();
+            try
+            {
+                var turnos = await _turnoService.ListarTurnosPendientes();
 
-            return Ok(turnos);
+                return Ok(turnos);
+            }
+            catch (System.Exception ex)
+            {
+
+                return Problem(ex.Message);
+            }
+
         }
 
         [HttpGet("HistorialTurnos")]
