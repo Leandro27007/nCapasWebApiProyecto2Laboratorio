@@ -10,7 +10,6 @@ namespace Proyecto2Laboratorio.DAL.Utilidades
     {
         public static async Task<string> ObtenerSiguienteId(this DbSet<Turno> dbSet)
         {
-
             string? ultimoId = await dbSet.OrderByDescending(t => t.FechaRegistro).Select(t => t.TurnoId).FirstOrDefaultAsync();
 
             if (string.IsNullOrEmpty(ultimoId))
@@ -18,7 +17,10 @@ namespace Proyecto2Laboratorio.DAL.Utilidades
                 return "T-1";
             }
 
-            int numeroTurno = ExtraerNumeroDeIdTurno(ultimoId);
+            //int numeroTurno = ExtraerNumeroDeIdTurno(ultimoId);
+            string numeroDeIdTurno = Regex.Replace(ultimoId, "T-", "").Trim();
+            int numeroTurno = 0;
+            int.TryParse(numeroDeIdTurno, out numeroTurno);
 
             numeroTurno++;
 
