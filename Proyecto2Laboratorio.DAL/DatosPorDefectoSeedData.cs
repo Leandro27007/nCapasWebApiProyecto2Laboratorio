@@ -19,7 +19,6 @@ namespace Proyecto2Laboratorio.DAL
                     return;
 
 
-                await db.Database.EnsureDeletedAsync();
                 await db.Database.EnsureCreatedAsync();
 
                 if (!db.usuario.Any())
