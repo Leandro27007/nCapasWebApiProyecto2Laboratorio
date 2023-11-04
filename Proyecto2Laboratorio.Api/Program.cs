@@ -49,6 +49,7 @@ builder.Services.AddScoped<IReciboService, ReciboService>();
 builder.Services.AddScoped<ITurnoService, TurnoService>();
 builder.Services.AddScoped<IPruebasLabService, PruebaLabService>();
 builder.Services.AddScoped<IMedicoService, MedicoService>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 builder.Services.AddCors(options =>
 {

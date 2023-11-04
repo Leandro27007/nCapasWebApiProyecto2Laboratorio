@@ -47,8 +47,12 @@ namespace Proyecto2Laboratorio.Api.Controllers
         [HttpPost("GenerarTurno")]
         public async Task<ActionResult> GenerarTurno(GenerarTurnoDTO modelo)
         {
-            var turno = await _turnoService.GenerarTurno(modelo);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            var turno = await _turnoService.GenerarTurno(modelo);
             return Ok("Tu numero de turno es: " + turno.TurnoId);
         }
 

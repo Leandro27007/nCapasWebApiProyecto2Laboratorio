@@ -11,17 +11,11 @@ namespace Proyecto2Laboratorio.Api.Controllers
     [ApiController]
     public class ClienteController : ControllerBase
     {
-
         private readonly IClienteService _clienteService;
         public ClienteController(IClienteService clienteService)
         {
             this._clienteService = clienteService;
         }
-
-
-
-
-
 
     }
 }

@@ -71,7 +71,7 @@ namespace Proyecto2Laboratorio.Api.Controllers
         /// Cambia el estado del recibo(consultaMedica) a Completado o EsperaResultados
         /// </summary>
         /// <returns></returns>
-        [HttpPost("CambiarEstadoRecibo")]
+        [HttpPost("DespacharPacientePorNumeroRecibo")]
         public async Task<ActionResult> CambiarEstadoRecibo([FromHeader] int idRecibo, [FromHeader] string nuevoEstado)
         {
             try

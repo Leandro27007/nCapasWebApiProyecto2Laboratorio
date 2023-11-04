@@ -19,9 +19,12 @@ namespace Proyecto2Laboratorio.Api.Controllers
         [HttpPost("GenerarRecibo")]
         public async Task<ActionResult> GenerarRecibo(GenerarReciboDTO reciboDTO)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
             var resultado = await _reciboService.GenerarReciboAsync(reciboDTO);
-
             return Ok(resultado);
         }
        

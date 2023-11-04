@@ -1,4 +1,6 @@
-﻿namespace DTOs
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DTOs
 {
     public class PruebaLabTurnoDTO
     {
