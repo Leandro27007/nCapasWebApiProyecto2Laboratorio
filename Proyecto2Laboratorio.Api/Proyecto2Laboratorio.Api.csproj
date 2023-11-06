@@ -19,6 +19,7 @@
     <ProjectReference Include="..\..\DemoMauiHybridJWTAuthenticationAndAuthorization\SharedLibrary\SharedLibrary.csproj" />
     <ProjectReference Include="..\DTOs\DTOs.csproj" />
     <ProjectReference Include="..\Proyecto2Laboratorio.BLL\Proyecto2Laboratorio.BLL.csproj" />
+    <ProjectReference Include="..\Proyecto2Laboratorio.Shared\Proyecto2Laboratorio.Shared.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿using SharedLibrary.Models;
+﻿using Proyecto2Laboratorio.Shared.Models;
 using System.Threading.Tasks;
 
 namespace Proyecto2Laboratorio.BLL.Interfaces

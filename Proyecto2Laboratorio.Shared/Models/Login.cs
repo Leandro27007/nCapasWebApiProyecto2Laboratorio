@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SharedLibrary.Models
+namespace Proyecto2Laboratorio.Shared.Models
 {
     public class Login
     {

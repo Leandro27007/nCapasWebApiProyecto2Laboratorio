@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Proyecto2Laboratorio.BLL.Interfaces;
-using SharedLibrary.Models;
+using Proyecto2Laboratorio.Shared.Models;
 using System.Threading.Tasks;
 
 namespace Proyecto2Laboratorio.Api.Controllers

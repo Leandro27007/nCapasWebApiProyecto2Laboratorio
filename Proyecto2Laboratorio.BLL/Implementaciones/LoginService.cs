@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Proyecto2Laboratorio.BLL.Interfaces;
 using Proyecto2Laboratorio.DAL;
-using SharedLibrary.Models;
+using Proyecto2Laboratorio.Shared.Models;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
