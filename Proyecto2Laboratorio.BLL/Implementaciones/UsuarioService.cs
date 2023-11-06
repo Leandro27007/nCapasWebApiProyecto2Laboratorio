@@ -5,6 +5,7 @@ using Proyecto2Laboratorio.DAL.Repositorio.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,7 +22,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
 
         public async Task<UsuarioDTO?> BuscarUsuarioAsync(string cedula)
         {
-            var usuario = await _usuarioRepositorio.Consultar().Where(u => u.UsuarioId == cedula).FirstOrDefaultAsync();
+            var usuario = await _usuarioRepositorio.Consultar().Where(u => u.UsuarioId == cedula).Include(u => u.Role).FirstOrDefaultAsync();
 
             if (usuario == null)
                 return null;
@@ -31,6 +32,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                 Nombre = usuario.Nombre,
                 Apellido = usuario.Apellido,
                 Cedula = usuario.UsuarioId,
+                NombreRol = usuario.Role.NombreRol,
                 Email = usuario.Email,
                 Telefono = usuario.Telefono
             };
@@ -45,10 +47,11 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                     Nombre = usuarioCreacionDTO.Nombre,
                     Apellido = usuarioCreacionDTO.Apellido,
                     Username = usuarioCreacionDTO.Username,
-                    Password = usuarioCreacionDTO.Password,
+                    Password = HashPassword(usuarioCreacionDTO.Password),
                     Telefono = usuarioCreacionDTO.Telefono,
                     Email = usuarioCreacionDTO.Email,
                     UsuarioId = usuarioCreacionDTO.Cedula,
+                    RolId = usuarioCreacionDTO.IdRol,
                     FechaRegistro = DateTime.Now
                 });
 
@@ -77,6 +80,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                     Apellido = creacionPruebaLabDTO.Apellido,
                     Telefono = creacionPruebaLabDTO.Telefono,
                     Email = creacionPruebaLabDTO.Email,
+                    RolId = creacionPruebaLabDTO.RolId,
                     UsuarioId = creacionPruebaLabDTO.Cedula,
                     FechaRegistro = DateTime.Now
                 });
@@ -110,16 +114,35 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
 
         public async Task<List<UsuarioDTO>?> ListarUsuario()
         {
-            var usuarios = await _usuarioRepositorio.Consultar().ToListAsync();
+            var usuarios = await _usuarioRepositorio.Consultar().Include(u => u.Role).ToListAsync();
 
             return usuarios.Select(u => new UsuarioDTO() 
             {
                 Cedula = u.UsuarioId,
                 Nombre = u.Nombre,
                 Apellido = u.Apellido,
+                NombreRol = u.Role.NombreRol,
                 Telefono = u.Telefono,
                 Email = u.Email
             }).ToList();
+        }
+
+
+        // Encrypt user password
+        private static string HashPassword(string password)
+        {
+            byte[] salt = new byte[16];
+            using (var randomGenerator = RandomNumberGenerator.Create())
+            {
+                randomGenerator.GetBytes(salt);
+            }
+            var rfcPassword = new Rfc2898DeriveBytes(password, salt, 1000, HashAlgorithmName.SHA1);
+            byte[] rfcPasswordHash = rfcPassword.GetBytes(20);
+
+            byte[] passwordHash = new byte[36];
+            Array.Copy(salt, 0, passwordHash, 0, 16);
+            Array.Copy(rfcPasswordHash, 0, passwordHash, 16, 20);
+            return Convert.ToBase64String(passwordHash);
         }
     }
 }

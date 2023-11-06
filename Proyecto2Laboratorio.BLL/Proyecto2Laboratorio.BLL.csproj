@@ -8,6 +8,8 @@
 
   <ItemGroup>
 
+    <ProjectReference Include="..\..\DemoMauiHybridJWTAuthenticationAndAuthorization\SharedLibrary\SharedLibrary.csproj" />
+
     <ProjectReference Include="..\DTOs\DTOs.csproj" />
 
     <ProjectReference Include="..\Proyecto2Laboratorio.DAL\Proyecto2Laboratorio.DAL.csproj" />

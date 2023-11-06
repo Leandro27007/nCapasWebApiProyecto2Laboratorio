@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Proyecto2Laboratorio.Entities;
 using System;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace Proyecto2Laboratorio.DAL
@@ -21,6 +22,40 @@ namespace Proyecto2Laboratorio.DAL
 
                 await db.Database.EnsureCreatedAsync();
 
+
+                if (!db.rol.Any())
+                {
+                    db.Add(new Rol()
+                    {
+                        NombreRol = "Usuario",
+                        Descripcion = "Rol por defecto",
+                        FechaRegistro = DateTime.Now
+                    });                    
+                    db.Add(new Rol()
+                    {
+                        NombreRol = "Medico",
+                        Descripcion = "Rol que permite despachar los pacientes",
+                        FechaRegistro = DateTime.Now
+                    });   
+                    
+                    db.Add(new Rol()
+                    {
+                        NombreRol = "Cajero",
+                        Descripcion = "Rol que permite realizar procesos de facturacion",
+                        FechaRegistro = DateTime.Now
+                    });
+
+                    db.Add(new Rol()
+                    {
+                        NombreRol = "Administrador",
+                        Descripcion = "Rol por defecto",
+                        FechaRegistro = DateTime.Now
+                    });
+
+                    await db.SaveChangesAsync();
+                }
+
+
                 if (!db.usuario.Any())
                 {
                     db.Add(new Usuario()
@@ -30,8 +65,9 @@ namespace Proyecto2Laboratorio.DAL
                         Apellido = "Perez",
                         Email = "fp@gmail.com",
                         Username = "fabio123",
-                        Password = "fabio123",
+                        Password = HashPassword("fabio123"),
                         Telefono = "8090000000",
+                        RolId = 4,
                         FechaRegistro = DateTime.Now
                     });
 
@@ -44,7 +80,7 @@ namespace Proyecto2Laboratorio.DAL
                     db.Add(new PruebaDeLaboratorio()
                     {
                         Nombre = "Hemograma",
-                        Descripcion = "Evaluar células sanguíneas: glóbulos rojos, leucocitos y plaquetas.",
+                        Descripcion = "Evaluar células sanguíneas.",
                         Precio = 750.50m,
                         Fecha = DateTime.Now,
                         Recibos = null!,
@@ -105,6 +141,20 @@ namespace Proyecto2Laboratorio.DAL
 
 
         }
+        private static string HashPassword(string password)
+        {
+            byte[] salt = new byte[16];
+            using (var randomGenerator = RandomNumberGenerator.Create())
+            {
+                randomGenerator.GetBytes(salt);
+            }
+            var rfcPassword = new Rfc2898DeriveBytes(password, salt, 1000, HashAlgorithmName.SHA1);
+            byte[] rfcPasswordHash = rfcPassword.GetBytes(20);
 
+            byte[] passwordHash = new byte[36];
+            Array.Copy(salt, 0, passwordHash, 0, 16);
+            Array.Copy(rfcPasswordHash, 0, passwordHash, 16, 20);
+            return Convert.ToBase64String(passwordHash);
+        }
     }
 }

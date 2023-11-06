@@ -1,7 +1,9 @@
 ﻿using DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Proyecto2Laboratorio.BLL.Interfaces;
 using Proyecto2Laboratorio.Entities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Proyecto2Laboratorio.Api.Controllers
@@ -19,7 +21,8 @@ namespace Proyecto2Laboratorio.Api.Controllers
         }
 
         [HttpGet("ListarTurnosPendientes")]
-        public async Task<ActionResult> Listar( )
+        [Authorize(Roles = "Cajero,Administrador")]
+        public async Task<ActionResult<List<TurnoDTO>>> Listar()
         {
             try
             {
@@ -36,7 +39,8 @@ namespace Proyecto2Laboratorio.Api.Controllers
         }
 
         [HttpGet("HistorialTurnos")]
-        public async Task<ActionResult> HistorialTurnos()
+        [Authorize(Roles = "Administrador")]
+        public async Task<ActionResult<List<TurnoDTO>>> HistorialTurnos()
         {
             var turnos = await _turnoService.HistorialTurnos();
 
@@ -45,7 +49,8 @@ namespace Proyecto2Laboratorio.Api.Controllers
 
 
         [HttpPost("GenerarTurno")]
-        public async Task<ActionResult> GenerarTurno(GenerarTurnoDTO modelo)
+        [Authorize(Roles = "Usuario,Administrador")]
+        public async Task<ActionResult<Turno>> GenerarTurno(GenerarTurnoDTO modelo)
         {
             if (!ModelState.IsValid)
             {
@@ -57,7 +62,8 @@ namespace Proyecto2Laboratorio.Api.Controllers
         }
 
         [HttpPut("CancelarTurno")]
-        public async Task<ActionResult> CancelarTurno(string TurnoId)
+        [Authorize(Roles = "Cajero,Administrador")]
+        public async Task<ActionResult<bool>> CancelarTurno(string TurnoId)
         {
             var resultado = await _turnoService.CancelarTurno(TurnoId);
 
@@ -75,7 +81,8 @@ namespace Proyecto2Laboratorio.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpDelete("ResetearTurnos")]
-        public async Task<ActionResult> ResetearTurnos()
+        [Authorize(Roles = "Administrador")]
+        public async Task<ActionResult<bool>> ResetearTurnos()
         {
 
             var resultado = await _turnoService.ResetearTurnos();

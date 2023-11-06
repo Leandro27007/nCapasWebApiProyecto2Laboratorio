@@ -12,9 +12,11 @@ namespace Proyecto2Laboratorio.Entities
         [Key]
         public int PruebaDeLaboratorioId { get; set; }
         [Required]
+        [StringLength(50)]
         public string Nombre { get; set; }
         [Required]
         public decimal Precio { get; set; }
+        [StringLength(50)]
         public string Descripcion { get; set; }
         public DateTime Fecha { get; set; }
 

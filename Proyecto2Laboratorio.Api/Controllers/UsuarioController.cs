@@ -1,6 +1,8 @@
 ﻿using DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Proyecto2Laboratorio.BLL.Interfaces;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Proyecto2Laboratorio.Api.Controllers
@@ -17,7 +19,8 @@ namespace Proyecto2Laboratorio.Api.Controllers
         }
 
         [HttpGet("ListarUsuario")]
-        public async Task<ActionResult> ListarUsuario()
+        [Authorize(Roles = "Administrador")]
+        public async Task<ActionResult<List<UsuarioDTO>>> ListarUsuario()
         {
             try
             {
@@ -32,7 +35,8 @@ namespace Proyecto2Laboratorio.Api.Controllers
         }
 
         [HttpGet("BuscarUsuario{Cedula}")]
-        public async Task<ActionResult> BuscarUsuario(string Cedula)
+        [Authorize(Roles = "Administrador")]
+        public async Task<ActionResult<UsuarioDTO>> BuscarUsuario(string Cedula)
         {
             try
             {
@@ -50,7 +54,8 @@ namespace Proyecto2Laboratorio.Api.Controllers
 
         }
         [HttpPost("CrearUsuario")]
-        public async Task<ActionResult> CrearUsuario([FromBody] UsuarioCreacionDTO usuarioCreacionDTO)
+        [Authorize(Roles = "Administrador")]
+        public async Task<ActionResult<UsuarioDTO>> CrearUsuario([FromBody] UsuarioCreacionDTO usuarioCreacionDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -70,7 +75,8 @@ namespace Proyecto2Laboratorio.Api.Controllers
         }
 
         [HttpPut("EditarUsuario")]
-        public async Task<ActionResult> EditarUsuario([FromBody] UsuarioEdicionDTO usuarioEdicionDTO)
+        [Authorize(Roles = "Administrador")]
+        public async Task<ActionResult<bool>> EditarUsuario([FromBody] UsuarioEdicionDTO usuarioEdicionDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -89,7 +95,8 @@ namespace Proyecto2Laboratorio.Api.Controllers
         }
 
         [HttpDelete("EliminarUsuario{Cedula}")]
-        public async Task<ActionResult> EliminarUsuario(string Cedula)
+        [Authorize(Roles = "Administrador")]
+        public async Task<ActionResult<bool>> EliminarUsuario(string Cedula)
         {
             try
             {

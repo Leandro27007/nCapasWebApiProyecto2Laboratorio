@@ -1,12 +1,15 @@
 ﻿using DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Proyecto2Laboratorio.BLL.Interfaces;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Proyecto2Laboratorio.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Administrador")]
     public class ReciboController : ControllerBase
     {
         private readonly IReciboService _reciboService;
@@ -17,7 +20,8 @@ namespace Proyecto2Laboratorio.Api.Controllers
         }
 
         [HttpPost("GenerarRecibo")]
-        public async Task<ActionResult> GenerarRecibo(GenerarReciboDTO reciboDTO)
+        [Authorize(Roles = "Cajero,Administrador")]
+        public async Task<ActionResult<ReciboDTO>> GenerarRecibo(GenerarReciboDTO reciboDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -29,23 +33,26 @@ namespace Proyecto2Laboratorio.Api.Controllers
         }
        
         [HttpGet("ListarRecibos")]
-        public async Task<ActionResult> ListarRecibos([FromQuery] int PaginaActual = 1)
+        [Authorize(Roles = "Administrador")]
+        public async Task<ActionResult<List<ReciboDTO>>> ListarRecibos([FromQuery] int PaginaActual = 1)
         {
             var resultado = await _reciboService.ListarRecibosAsync(PaginaActual);
             return Ok(resultado);
         }
 
         [HttpGet("CheckearEstadoDeRecibo{id}")]
-        public async Task<ActionResult> ObtenerEstadoDeRecibo( int id)
+        [Authorize(Roles = "Cajero,Administrador")]
+        public async Task<ActionResult> ObtenerEstadoDeRecibo(int numeroRecibo)
         {
 
-            var resultado = await _reciboService.ObtenerEstadoReciboAsync(id);
+            var resultado = await _reciboService.ObtenerEstadoReciboAsync(numeroRecibo);
 
             return Ok(resultado);
         }
 
-        [HttpPost("Reembolsar")]
-        public async Task<ActionResult> Reembolsar([FromHeader] int IdRecibo, [FromHeader] string notaModificacion)
+        [HttpPost("CancelarRecibo")]
+        [Authorize(Roles = "Cajero,Administrador")]
+        public async Task<ActionResult<bool>> Reembolsar([FromHeader] int IdRecibo, [FromHeader] string notaModificacion)
         {
             var resultado = await _reciboService.ReembolsarReciboAsync(IdRecibo, notaModificacion);
             return Ok(resultado);

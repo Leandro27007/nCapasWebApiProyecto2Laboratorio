@@ -13,7 +13,7 @@ namespace Proyecto2Laboratorio.DAL
 
         public ApplicationDbContext(DbContextOptions opciones) : base(opciones)
         {
-            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            //AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
         public DbSet<Cliente> cliente { get; set; }
@@ -22,7 +22,6 @@ namespace Proyecto2Laboratorio.DAL
         public DbSet<PruebaDeLaboratorio> pruebaDeLaboratorio { get; set; }
         public DbSet<PruebaDeLaboratorioRecibo> pruebaDeLaboratorioRecibo { get; set; }
         public DbSet<Rol> rol { get; set; }
-        public DbSet<Permiso> permiso { get; set; }
         public DbSet<Turno> turno { get; set; }
         public DbSet<TurnoPruebaDeLaboratorio> turnoPruebaDeLaboratorio { get; set; }
 

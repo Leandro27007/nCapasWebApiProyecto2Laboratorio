@@ -14,6 +14,7 @@ namespace Proyecto2Laboratorio.Entities
         public PruebaDeLaboratorio PruebaDeLaboratorio { get; set; }
         public int PruebaDeLaboratorioId { get; set; }
         public Turno Turno { get; set; }
+        [StringLength(15)]
         public string TurnoId { get; set; } = "T-";
 
     }

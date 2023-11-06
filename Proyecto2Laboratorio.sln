@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proyecto2Laboratorio.Entiti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTOs", "DTOs\DTOs.csproj", "{3368CD3D-4390-4F3B-85F0-62E21BED99F7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedLibrary", "..\DemoMauiHybridJWTAuthenticationAndAuthorization\SharedLibrary\SharedLibrary.csproj", "{23926E43-6FB3-472B-8B15-DB6FC74C8D5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{3368CD3D-4390-4F3B-85F0-62E21BED99F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3368CD3D-4390-4F3B-85F0-62E21BED99F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3368CD3D-4390-4F3B-85F0-62E21BED99F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23926E43-6FB3-472B-8B15-DB6FC74C8D5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23926E43-6FB3-472B-8B15-DB6FC74C8D5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23926E43-6FB3-472B-8B15-DB6FC74C8D5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23926E43-6FB3-472B-8B15-DB6FC74C8D5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

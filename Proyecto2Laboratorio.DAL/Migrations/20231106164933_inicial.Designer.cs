@@ -12,8 +12,8 @@ using Proyecto2Laboratorio.DAL;
 namespace Proyecto2Laboratorio.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231015041418_CambioNombreDeCampoFkUsuarioEnRecibo")]
-    partial class CambioNombreDeCampoFkUsuarioEnRecibo
+    [Migration("20231106164933_inicial")]
+    partial class inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,48 +35,32 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
                     b.Property<string>("Apellido")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Cedula")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Telefono")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.HasKey("ClienteId");
 
                     b.ToTable("cliente");
-                });
-
-            modelBuilder.Entity("Proyecto2Laboratorio.Entities.Permiso", b =>
-                {
-                    b.Property<int>("PermisoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PermisoId"));
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NombrePermiso")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PermisoId");
-
-                    b.ToTable("permiso");
                 });
 
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.PruebaDeLaboratorio", b =>
@@ -89,14 +73,16 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal>("Precio")
                         .HasColumnType("decimal(18,2)");
@@ -141,10 +127,6 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReciboId"));
 
-                    b.Property<string>("Cedula")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
@@ -153,7 +135,8 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
                     b.Property<string>("Estado")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
@@ -163,16 +146,23 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
                     b.Property<string>("NCF")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("NotaDeModificacion")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("UsuarioId")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.HasKey("ReciboId");
 
-                    b.HasIndex("Cedula");
-
                     b.HasIndex("ClienteId");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("recibo");
                 });
@@ -187,14 +177,16 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NombreRol")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("RolId");
 
@@ -204,11 +196,16 @@ namespace Proyecto2Laboratorio.DAL.Migrations
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.Turno", b =>
                 {
                     b.Property<string>("TurnoId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("EstadoTurno")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("TurnoId");
 
@@ -228,7 +225,8 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
                     b.Property<string>("TurnoId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.HasKey("TurnoPruebaDeLaboratorioId");
 
@@ -241,36 +239,48 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.Usuario", b =>
                 {
-                    b.Property<string>("Cedula")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("UsuarioId")
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("Apellido")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("RolId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Telefono")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("Cedula");
+                    b.HasKey("UsuarioId");
+
+                    b.HasIndex("RolId");
 
                     b.ToTable("usuario");
                 });
@@ -296,15 +306,15 @@ namespace Proyecto2Laboratorio.DAL.Migrations
 
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.Recibo", b =>
                 {
-                    b.HasOne("Proyecto2Laboratorio.Entities.Usuario", "Usuario")
-                        .WithMany("Recibos")
-                        .HasForeignKey("Cedula")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Proyecto2Laboratorio.Entities.Cliente", "Cliente")
                         .WithMany("Recibos")
                         .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Proyecto2Laboratorio.Entities.Usuario", "Usuario")
+                        .WithMany("Recibos")
+                        .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -332,6 +342,17 @@ namespace Proyecto2Laboratorio.DAL.Migrations
                     b.Navigation("Turno");
                 });
 
+            modelBuilder.Entity("Proyecto2Laboratorio.Entities.Usuario", b =>
+                {
+                    b.HasOne("Proyecto2Laboratorio.Entities.Rol", "Role")
+                        .WithMany("Usuarios")
+                        .HasForeignKey("RolId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.Cliente", b =>
                 {
                     b.Navigation("Recibos");
@@ -347,6 +368,11 @@ namespace Proyecto2Laboratorio.DAL.Migrations
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.Recibo", b =>
                 {
                     b.Navigation("PruebasDeLaboratorioRecibo");
+                });
+
+            modelBuilder.Entity("Proyecto2Laboratorio.Entities.Rol", b =>
+                {
+                    b.Navigation("Usuarios");
                 });
 
             modelBuilder.Entity("Proyecto2Laboratorio.Entities.Turno", b =>

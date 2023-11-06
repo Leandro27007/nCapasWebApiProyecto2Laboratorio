@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DTOs;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Proyecto2Laboratorio.BLL.Interfaces;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Proyecto2Laboratorio.Api.Controllers
@@ -8,7 +11,6 @@ namespace Proyecto2Laboratorio.Api.Controllers
     [ApiController]
     public class MedicoController : ControllerBase
     {
-        //TODO: hacer
         private readonly IMedicoService _medicoService;
         public MedicoController(IMedicoService medicoService)
         {
@@ -16,7 +18,8 @@ namespace Proyecto2Laboratorio.Api.Controllers
         }
 
         [HttpGet("BuscarPacientePorIdRecibo {idRecibo}")]
-        public async Task<ActionResult> BuscarPacientePorReciboId(int idRecibo)
+        [Authorize(Roles = "Medico,Administrador")]
+        public async Task<ActionResult<PacienteDTO>> BuscarPacientePorReciboId(int idRecibo)
         {
             try
             {
@@ -33,7 +36,8 @@ namespace Proyecto2Laboratorio.Api.Controllers
         }
 
         [HttpGet("PacientesPendientes")]
-        public async Task<ActionResult> ListarPacientesPendientes()
+        [Authorize(Roles = "Medico,Administrador")]
+        public async Task<ActionResult<List<PacienteDTO>>> ListarPacientesPendientes()
         {
             try
             {
@@ -51,7 +55,8 @@ namespace Proyecto2Laboratorio.Api.Controllers
 
 
         [HttpGet("EstadosDeRecibo")]
-        public async Task<ActionResult> ObtenerEstadosDeRecibo()
+        [Authorize(Roles = "Medico,Administrador")]
+        public async Task<ActionResult<List<string>>> ObtenerEstadosDeRecibo()
         {
             try
             {
@@ -72,7 +77,8 @@ namespace Proyecto2Laboratorio.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("DespacharPacientePorNumeroRecibo")]
-        public async Task<ActionResult> CambiarEstadoRecibo([FromHeader] int idRecibo, [FromHeader] string nuevoEstado)
+        [Authorize(Roles = "Medico,Administrador")]
+        public async Task<ActionResult<bool>> CambiarEstadoRecibo([FromHeader] int idRecibo, [FromHeader] string nuevoEstado)
         {
             try
             {

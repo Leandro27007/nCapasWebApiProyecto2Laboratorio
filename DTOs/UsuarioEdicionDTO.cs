@@ -15,6 +15,8 @@ namespace DTOs
         public string Nombre { get; set; }
         [Required]
         public string Apellido { get; set; }
+        [Required]
+        public int RolId { get; set; }
         public string Telefono { get; set; }
         public string? Email { get; set; }
     }

@@ -13,12 +13,16 @@ namespace Proyecto2Laboratorio.Entities
         [Key]
         public int ClienteId { get; set; }
         [Required]
-        
+        [StringLength(50)]
         public string Nombre { get; set; }
         [Required]
+        [StringLength(50)]
         public string Apellido { get; set; }
+        [StringLength(15)]
         public string? Telefono { get; set; }
+        [StringLength(15)]
         public string? Cedula { get; set; }
+        [StringLength(50)]
         public string? Email { get; set; }
         [Required]
         public DateTime FechaRegistro { get; set; }
