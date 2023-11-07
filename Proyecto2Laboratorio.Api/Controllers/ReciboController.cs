@@ -9,7 +9,6 @@ namespace Proyecto2Laboratorio.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Administrador")]
     public class ReciboController : ControllerBase
     {
         private readonly IReciboService _reciboService;
