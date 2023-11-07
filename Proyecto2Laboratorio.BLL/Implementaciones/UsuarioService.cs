@@ -2,12 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Proyecto2Laboratorio.BLL.Interfaces;
 using Proyecto2Laboratorio.DAL.Repositorio.Interfaces;
-using Proyecto2Laboratorio.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Proyecto2Laboratorio.BLL.Implementaciones
@@ -18,7 +16,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
         private readonly IUsuarioRepositorio _usuarioRepositorio;
         public UsuarioService(IUsuarioRepositorio usuarioRepositorio)
         {
-                this._usuarioRepositorio = usuarioRepositorio;
+            this._usuarioRepositorio = usuarioRepositorio;
         }
 
         public async Task<UsuarioDTO?> BuscarUsuarioAsync(string cedula)
@@ -28,7 +26,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
             if (usuario == null)
                 return null;
 
-            return new() 
+            return new()
             {
                 Nombre = usuario.Nombre,
                 Apellido = usuario.Apellido,
@@ -76,16 +74,20 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
         {
             try
             {
-                await _usuarioRepositorio.Editar(new Entities.Usuario()
-                {
-                    Nombre = creacionPruebaLabDTO.Nombre,
-                    Apellido = creacionPruebaLabDTO.Apellido,
-                    Telefono = creacionPruebaLabDTO.Telefono,
-                    Email = creacionPruebaLabDTO.Email,
-                    RolId = creacionPruebaLabDTO.RolId,
-                    UsuarioId = creacionPruebaLabDTO.Cedula,
-                    FechaRegistro = DateTime.Now
-                });
+                var usuarioAEditar = await _usuarioRepositorio.Obtener(u => u.UsuarioId == creacionPruebaLabDTO.Cedula);
+
+                if (usuarioAEditar == null)
+                    return false;
+
+                usuarioAEditar.UsuarioId = creacionPruebaLabDTO.Cedula;
+                usuarioAEditar.Nombre = creacionPruebaLabDTO.Nombre;
+                usuarioAEditar.Apellido = creacionPruebaLabDTO.Apellido;
+                usuarioAEditar.Username = creacionPruebaLabDTO.UserName;
+                usuarioAEditar.Password = HashPassword(creacionPruebaLabDTO.Password);
+                usuarioAEditar.Telefono = creacionPruebaLabDTO.Telefono;
+                usuarioAEditar.Email = creacionPruebaLabDTO.Email;
+
+                await _usuarioRepositorio.Editar(usuarioAEditar);
 
                 return true;
             }
@@ -118,7 +120,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
         {
             var usuarios = await _usuarioRepositorio.Consultar().Include(u => u.Role).ToListAsync();
 
-            return usuarios.Select(u => new UsuarioDTO() 
+            return usuarios.Select(u => new UsuarioDTO()
             {
                 Cedula = u.UsuarioId,
                 Nombre = u.Nombre,
