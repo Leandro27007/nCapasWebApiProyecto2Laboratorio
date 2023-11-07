@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Proyecto2Laboratorio.BLL.Interfaces;
 using Proyecto2Laboratorio.DAL.Repositorio.Interfaces;
+using Proyecto2Laboratorio.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                 Apellido = usuario.Apellido,
                 Cedula = usuario.UsuarioId,
                 NombreRol = usuario.Role.NombreRol,
+                UserName = usuario.Username,
                 Email = usuario.Email,
                 Telefono = usuario.Telefono
             };
@@ -121,6 +123,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                 Cedula = u.UsuarioId,
                 Nombre = u.Nombre,
                 Apellido = u.Apellido,
+                UserName = u.Username,
                 NombreRol = u.Role.NombreRol,
                 Telefono = u.Telefono,
                 Email = u.Email
