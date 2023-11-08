@@ -30,10 +30,15 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
         {
 
             //Busca un cliente que su cedula sea igual a la que se recibio en el DTO desde el controlador.
+            if(reciboDTO.cedula.Length() > 0)
             var cliente = await _clienteRepositorio.Obtener(c => c.Cedula == reciboDTO.Cedula);
 
             //Mando a registrar un cliente si no existe en la base de datos.
             Cliente clienteParaAgregar = new Cliente();
+
+
+
+
             if (cliente == null)
             {
                 clienteParaAgregar.Nombre = reciboDTO.NombreCliente;
@@ -41,6 +46,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                 clienteParaAgregar.Apellido = reciboDTO.ApellidoCliente;
                 clienteParaAgregar.Email = reciboDTO.Email;
                 clienteParaAgregar.FechaRegistro = DateTime.Now;
+                 if(reciboDTO.cedula.Lenght() > 0)
                 clienteParaAgregar.Cedula = reciboDTO.Cedula;
 
                 //Mando a registrar este cliente que se mapeao
