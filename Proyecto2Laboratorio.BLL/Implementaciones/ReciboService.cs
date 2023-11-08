@@ -29,9 +29,6 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
         public async Task<ReciboDTO?> GenerarReciboAsync(GenerarReciboDTO reciboDTO)
         {
 
-            //LOGICA PARA VALIDAR
-            //*********************
-
             //Busca un cliente que su cedula sea igual a la que se recibio en el DTO desde el controlador.
             var cliente = await _clienteRepositorio.Obtener(c => c.Cedula == reciboDTO.Cedula);
 
@@ -111,6 +108,11 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                                                  .Where(r => r.ReciboId == idRecibo).FirstOrDefaultAsync();
 
             ReciboDTO reciboDto = new();
+
+            if (recibo == null)
+            {
+                return null;
+            }
 
             reciboDto.IdRecibo =  recibo.ReciboId;
             reciboDto.NombreCajero = recibo.Usuario.Nombre;

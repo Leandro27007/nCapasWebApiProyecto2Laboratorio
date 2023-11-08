@@ -59,6 +59,7 @@ builder.Services.AddScoped<IPruebaDeLaboratorioRepositorio, PruebaDeLaboratorioR
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 builder.Services.AddScoped<IRolRepositorio, RolRepositorio>();
 
+
 //BLLServices
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IReciboService, ReciboService>();
@@ -67,6 +68,7 @@ builder.Services.AddScoped<IPruebasLabService, PruebaLabService>();
 builder.Services.AddScoped<IMedicoService, MedicoService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IRolService, RolService>();
+builder.Services.AddScoped<IReporteService, ReporteService>();
 
 builder.Services.AddCors(options =>
 {

@@ -39,12 +39,26 @@ namespace Proyecto2Laboratorio.Api.Controllers
             return Ok(resultado);
         }
 
-        [HttpGet("CheckearEstadoDeRecibo{id}")]
+        [HttpGet("CheckearEstadoDeRecibo{numeroRecibo}")]
         [Authorize(Roles = "Cajero,Administrador")]
         public async Task<ActionResult> ObtenerEstadoDeRecibo(int numeroRecibo)
         {
-
             var resultado = await _reciboService.ObtenerEstadoReciboAsync(numeroRecibo);
+
+            return Ok(resultado);
+        }
+
+        [HttpGet("BuscarReciboPorId{numeroRecibo}")]
+        [Authorize(Roles = "Cajero,Administrador")]
+        public async Task<ActionResult<ReciboDTO>> BuscarReciboPorId(int numeroRecibo)
+        {
+
+            var resultado = await _reciboService.BuscarReciboAsync(numeroRecibo);
+
+            if (resultado == null)
+            {
+                return NotFound("No se encontro el recibo");
+            }
 
             return Ok(resultado);
         }
@@ -56,7 +70,6 @@ namespace Proyecto2Laboratorio.Api.Controllers
             var resultado = await _reciboService.ReembolsarReciboAsync(IdRecibo, notaModificacion);
             return Ok(resultado);
         }
-
 
     }
 }
