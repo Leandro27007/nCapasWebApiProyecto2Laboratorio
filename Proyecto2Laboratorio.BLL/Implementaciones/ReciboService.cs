@@ -30,7 +30,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
         {
 
             //Busca un cliente que su cedula sea igual a la que se recibio en el DTO desde el controlador.
-            if(!string.IsNullOrEmpty(reciboDTO.cedula))
+            if(!string.IsNullOrEmpty(reciboDTO.Cedula))
             {
                 var cliente = await _clienteRepositorio.Obtener(c => c.Cedula == reciboDTO.Cedula);
             }
@@ -46,7 +46,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                 clienteParaAgregar.Apellido = reciboDTO.ApellidoCliente;
                 clienteParaAgregar.Email = reciboDTO.Email;
                 clienteParaAgregar.FechaRegistro = DateTime.Now;
-            if(!string.IsNullOrEmpty(reciboDTO.cedula))
+            if(!string.IsNullOrEmpty(reciboDTO.Cedula))
             {
                 clienteParaAgregar.Cedula = reciboDTO.Cedula;
             }
