@@ -143,8 +143,8 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
         public async Task<List<ReciboDTO>?> ListarRecibosAsync(int paginaActual = 1)
         {
             var recibo = await _reciboRepositorio.Consultar()
-                                                 .Skip(paginaActual + 1)
-                                                 .Take(2)
+                                                 /*.Skip(paginaActual + 1)
+                                                 .Take(10)*/
                                                  .Include(r => r.Usuario)
                                                  .Include(r => r.Cliente)
                                                  .Include(r => r.PruebasDeLaboratorioRecibo)
