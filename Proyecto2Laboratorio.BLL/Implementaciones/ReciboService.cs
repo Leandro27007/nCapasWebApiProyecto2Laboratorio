@@ -29,33 +29,35 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
         public async Task<ReciboDTO?> GenerarReciboAsync(GenerarReciboDTO reciboDTO)
         {
 
+            Cliente cliente = null;
+
             //Busca un cliente que su cedula sea igual a la que se recibio en el DTO desde el controlador.
             if(!string.IsNullOrEmpty(reciboDTO.Cedula))
             {
-                var cliente = await _clienteRepositorio.Obtener(c => c.Cedula == reciboDTO.Cedula);
+                cliente = await _clienteRepositorio.Obtener(c => c.Cedula == reciboDTO.Cedula);
             }
            
 
-            //Mando a registrar un cliente si no existe en la base de datos.
-            Cliente clienteParaAgregar = new Cliente();
+                //Mando a registrar un cliente si no existe en la base de datos.
+              Cliente clienteParaAgregar = new Cliente();
 
-            if (cliente == null)
-            {
-                clienteParaAgregar.Nombre = reciboDTO.NombreCliente;
-                clienteParaAgregar.Telefono = reciboDTO.Telefono;
-                clienteParaAgregar.Apellido = reciboDTO.ApellidoCliente;
-                clienteParaAgregar.Email = reciboDTO.Email;
-                clienteParaAgregar.FechaRegistro = DateTime.Now;
-            if(!string.IsNullOrEmpty(reciboDTO.Cedula))
-            {
-                clienteParaAgregar.Cedula = reciboDTO.Cedula;
-            }
-                
+                if (cliente == null)
+                {
+                    clienteParaAgregar.Nombre = reciboDTO.NombreCliente;
+                    clienteParaAgregar.Telefono = reciboDTO.Telefono;
+                    clienteParaAgregar.Apellido = reciboDTO.ApellidoCliente;
+                    clienteParaAgregar.Email = reciboDTO.Email;
+                    clienteParaAgregar.FechaRegistro = DateTime.Now;
+                 if(!string.IsNullOrEmpty(reciboDTO.Cedula))
+                    {
+                     clienteParaAgregar.Cedula = reciboDTO.Cedula;
+                    }
 
-                //Mando a registrar este cliente que se mapeao
-                //var clienteAgregado = _clienteRepositorio.Crear(clienteParaAgregar, GuardarCambios: false);
-            }
 
+                    //Mando a registrar este cliente que se mapeao
+                    //var clienteAgregado = _clienteRepositorio.Crear(clienteParaAgregar, GuardarCambios: false);
+                }
+            
             //Mapear el recibo.
             Recibo reciboParaAgregar = new Recibo();
             reciboParaAgregar.Usuario = null;
