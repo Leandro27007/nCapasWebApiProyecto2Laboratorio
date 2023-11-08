@@ -101,7 +101,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
             try
             {
                 var cliente = await _clienteRespositorio.Consultar(c => c.Recibos.Count() > 0 && c.Recibos.Where(r => r.Estado == EstadosRecibo.PENDIENTE).Count() > 0)
-                                              .Include(c => c.Recibos/*.Where(r => r.Estado == EstadosRecibo.PENDIENTE)*/)
+                                              .Include(c => c.Recibos.Where(r => r.Estado == EstadosRecibo.PENDIENTE))
                                               .ThenInclude(r => r.PruebasDeLaboratorioRecibo)
                                               .ThenInclude(r => r.PruebaDeLaboratorio)
                                               .ToListAsync();
