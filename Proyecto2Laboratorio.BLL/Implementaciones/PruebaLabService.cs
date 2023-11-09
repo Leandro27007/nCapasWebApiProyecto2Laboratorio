@@ -28,6 +28,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
             {
                 idPruebaLab = pl.PruebaDeLaboratorioId,
                 NombrePrueba = pl.Nombre,
+                Descripcion = pl.Descripcion,
                 Precio = pl.Precio
             }).ToListAsync();
 
