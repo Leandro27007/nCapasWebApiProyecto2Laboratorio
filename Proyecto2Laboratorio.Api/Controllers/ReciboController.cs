@@ -32,7 +32,7 @@ namespace Proyecto2Laboratorio.Api.Controllers
         }
        
         [HttpGet("ListarRecibos")]
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Cajero,Administrador")]
         public async Task<ActionResult<List<ReciboDTO>>> ListarRecibos([FromQuery] int PaginaActual = 1)
         {
             var resultado = await _reciboService.ListarRecibosAsync(PaginaActual);
