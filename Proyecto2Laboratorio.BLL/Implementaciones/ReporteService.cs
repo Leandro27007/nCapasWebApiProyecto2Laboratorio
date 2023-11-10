@@ -36,6 +36,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                     NombreCliente = r.Cliente.Nombre,
                     NombreCajero = r.Usuario.Nombre,
                     Estado = r.Estado,
+                    Fecha = r.Fecha,
                     Pruebas = r.PruebasDeLaboratorioRecibo.Select(plr => new PruebaReciboDTO()
                     {
                         IdPruebaLab = plr.PruebaDeLaboratorioId,
