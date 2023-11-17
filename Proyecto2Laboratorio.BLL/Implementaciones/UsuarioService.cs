@@ -42,6 +42,11 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
         {
             try
             {
+                if (usuarioCreacionDTO.Estado == null)
+                {
+                    usuarioCreacionDTO.Estado = "";
+                }
+
                 await _usuarioRepositorio.Crear(new Entities.Usuario()
                 {
                     Nombre = usuarioCreacionDTO.Nombre,
@@ -52,6 +57,7 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                     Email = usuarioCreacionDTO.Email,
                     UsuarioId = usuarioCreacionDTO.Cedula,
                     RolId = usuarioCreacionDTO.IdRol,
+                    Estado = usuarioCreacionDTO.Estado,
                     FechaRegistro = DateTime.Now
                 });
 
@@ -61,7 +67,8 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                     Nombre = usuarioCreacionDTO.Nombre,
                     Apellido = usuarioCreacionDTO.Apellido,
                     Email = usuarioCreacionDTO.Email,
-                    Telefono = usuarioCreacionDTO.Telefono
+                    Telefono = usuarioCreacionDTO.Telefono,
+                    Estado = usuarioCreacionDTO.Estado
                 };
             }
             catch (Exception)
@@ -86,6 +93,11 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                 usuarioAEditar.Password = HashPassword(creacionPruebaLabDTO.Password);
                 usuarioAEditar.Telefono = creacionPruebaLabDTO.Telefono;
                 usuarioAEditar.Email = creacionPruebaLabDTO.Email;
+                if (creacionPruebaLabDTO.Estado == null)
+                {
+                    creacionPruebaLabDTO.Estado = "";
+                }
+                usuarioAEditar.Estado = creacionPruebaLabDTO.Estado;
 
                 await _usuarioRepositorio.Editar(usuarioAEditar);
 
@@ -105,7 +117,8 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
 
                 if (usuarioParaEliminar != null)
                 {
-                    await _usuarioRepositorio.Eliminar(usuarioParaEliminar);
+                    usuarioParaEliminar.Estado = "Inactivo";
+                    await _usuarioRepositorio.Editar(usuarioParaEliminar);
                     return true;
                 }
                 return false;
@@ -128,7 +141,8 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
                 UserName = u.Username,
                 NombreRol = u.Role.NombreRol,
                 Telefono = u.Telefono,
-                Email = u.Email
+                Email = u.Email,
+                Estado = u.Estado
             }).ToList();
         }
 

@@ -29,6 +29,9 @@ namespace Proyecto2Laboratorio.BLL.Implementaciones
             var getUser = await appDbContext.usuario.Where(_ => _.Username!.Equals(model.UserName)).FirstOrDefaultAsync();
             if (getUser == null) return new ServiceResponse() { Flag = false, Message = "User not found" };
 
+            if (getUser.Estado == "Inactivo")
+                return new ServiceResponse() { Flag = false, Message = "El usuario no se encuentra activo" };
+
             var checkIfPasswordMatch = VerifyUserPassword(model.Password!, getUser.Password!);
 
             if (checkIfPasswordMatch)
