@@ -9,6 +9,7 @@
         public string NombreRol { get; set; }
         public string Telefono { get; set; }
         public string? Email { get; set; }
+        public string? Estado { get; set; }
 
     }
 }

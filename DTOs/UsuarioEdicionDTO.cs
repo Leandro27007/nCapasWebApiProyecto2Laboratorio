@@ -18,5 +18,6 @@ namespace DTOs
         public string Password { get; set; }
         public string Telefono { get; set; }
         public string? Email { get; set; }
+        public string? Estado { get; set; }
     }
 }

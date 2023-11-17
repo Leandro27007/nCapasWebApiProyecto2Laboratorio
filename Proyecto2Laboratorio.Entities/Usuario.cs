@@ -26,6 +26,7 @@ namespace Proyecto2Laboratorio.Entities
         public string Telefono { get; set; }
         [StringLength(50)]
         public string? Email { get; set; }
+        public string? Estado { get; set; }
         [Required]
         public DateTime FechaRegistro { get; set; }
         public List<Recibo> Recibos { get; set; }
